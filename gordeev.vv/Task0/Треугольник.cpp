@@ -2,21 +2,25 @@
 #include <clocale>
 using namespace std;
 
-int vichislenia(double x, double y, double z)
+double vichislenia(double x, double y, double z)
 {
-	double s;
-	double cosmax;
-	s = sqrt((x + y + z) * (x + y) * (x + z) * (y + z));
+	double cosmax=0;
 	if (x < y)
 		if (z <= y)
-			cosmax = 1 - (s / (x * z));
-		else
-			cosmax = 1 - (s / (x * y));
-	if(x>y)
-		if(z<=x)
-			cosmax = 1 - (s / (y * z));
-		else
-			cosmax = 1 - (s / (x * y));
+			cosmax = (x*x+ z*z- y*y)/(2*z*x);
+		if(z>y)
+			cosmax = (x * x - z * z + y * y) / (2 * y * x);
+	if (x > y)
+		if (z <= x)
+			cosmax = (-x * x + z * z + y * y) / (2 * z * y);
+		if(z>x)
+			cosmax = (x * x - z * z + y * y) / (2 * y * x);
+	if(x=y)
+		if(z>=x)
+			cosmax = (x * x - z * z + y * y) / (2 * y * x);
+		if(z<x)
+			cosmax = (x * x + z * z - y * y) / (2 * z * x);
+	
 	return cosmax;
 
 }
@@ -28,7 +32,7 @@ int proverka(double x, double y, double z)
 		return 1;
 	else
 	{
-		std::cout << std::endl << "Íåêîððåêòíî ââåäåíû ñòîðîíû" << std::endl;
+		std::cout << std::endl << "ÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ð¾ Ð²Ð²ÐµÐ´ÐµÐ½Ñ‹ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñ‹" << std::endl;
 		return 0;
 	}
 }
@@ -41,17 +45,20 @@ int main()
 
 	do
 	{
-		std::cout << "Ââåäèòå ñòîðîíû òðåóãîëüíèêà";
+		std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚Ð¾Ñ€Ð¾Ð½Ñ‹ Ñ‚Ñ€ÐµÑƒÐ³Ð¾Ð»ÑŒÐ½Ð¸ÐºÐ°: " << std::endl;
 		std::cin >> a >> b >> c;
-	} while (proverka(a, b, c));
+	} while (!proverka(a, b, c));
 	rez = vichislenia(a, b, c);
 	if (rez > 0)
-		std::cout << "Òðåóãîëüíèê îñòðîóãîëüíûé" << std::endl;
+		std::cout << "Ð¢Ñ€ÐµÑƒÐ³Ð¾Ð»ÑŒÐ½Ð¸Ðº Ð¾ÑÑ‚Ñ€Ð¾ÑƒÐ³Ð¾Ð»ÑŒÐ½Ñ‹Ð¹" << std::endl;
 	if (rez == 0)
-		std::cout << "Òðåóãîëüíèê ïðÿìîóãîëüíûé" << std::endl;
+		std::cout << "Ð¢Ñ€ÐµÑƒÐ³Ð¾Ð»ÑŒÐ½Ð¸Ðº Ð¿Ñ€ÑÐ¼Ð¾ÑƒÐ³Ð¾Ð»ÑŒÐ½Ñ‹Ð¹" << std::endl;
 	if (rez < 0)
-		std::cout << "Òðåóãîëüíèê òóïîóãîëüíûé" << std::endl;
+		std::cout << "Ð¢Ñ€ÐµÑƒÐ³Ð¾Ð»ÑŒÐ½Ð¸Ðº Ñ‚ÑƒÐ¿Ð¾ÑƒÐ³Ð¾Ð»ÑŒÐ½Ñ‹Ð¹" << std::endl;
 	return 0;
 }
+
+
+
 
 
