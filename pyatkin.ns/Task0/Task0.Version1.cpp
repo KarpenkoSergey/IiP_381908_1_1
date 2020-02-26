@@ -1,6 +1,7 @@
 //Подключение необходимых библиотек
 #include <iostream>
 #include <clocale>
+//Подключение пространства имен
 using namespace ::std;
 int check(double x, double y, double z) //Функция, проверяющая существование треугольника
 {
