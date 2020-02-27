@@ -17,7 +17,7 @@ int trtype(int max, int s2, int s3)
 
 int main()
 {
-	setlocale(LC_CTYPE, "Russian");
+	setlocale(LC_CTYPE, "rus");
 	int a, b, c;
 	cout<<"¬ведите стороны"<<endl;
 	cin >> a >> b >> c;
