@@ -14,14 +14,30 @@ Time::Time(int _hou, int _min, int _sec)
 }
 Time::Time(const char* c)
 {
-	hou = (c[0] - '0') * 10 + c[1] - '0';
-	min = (c[3] - '0') * 10 + c[4] - '0';
-	sec = (c[6] - '0') * 10 + c[7] - '0';
+	hou = 0; min = 0; sec = 0; 
+	int i = 0;
+	while(c[i] != ':')
+	{
+		hou = hou * 10 + c[i] - '0';
+		++i;
+	}
+	++i;
+	while (c[i] != ':')
+	{
+		min = min * 10 + c[i] - '0';
+		++i;
+	}
+	++i;
+	while (c[i] != 0)
+	{
+		sec = sec * 10 + c[i] - '0';
+		++i;
+	}
 }
 Time::~Time()
 {
 }
-Time Time::operator=(const Time& t)
+Time& Time::operator=(const Time& t)
 {
 	hou = t.hou; min = t.min; sec = t.sec;
 	return (*this);
@@ -46,7 +62,7 @@ Time Time::operator+(const Time& t)
 		res.hou -= 24;
 	return res;
 }
-Time Time::operator+=(int _sec)
+Time& Time::operator+=(int _sec)
 {
 	sec += _sec;
 	min += sec / 60;
@@ -76,7 +92,7 @@ Time Time::operator-(const Time& t)
 		res.hou += 24;
 	return res;
 }
-Time Time::operator-=(int _sec)
+Time& Time::operator-=(int _sec)
 {
 	sec -= _sec;
 	if (sec < 0)
@@ -145,7 +161,7 @@ void Time::enterTime()
 		std::cin >> min;
 	} while (min < 0 || min > 60);
 	do{
-	std::cout << "Seconds: ";
+	std::cout << "Seconds(from 0 to 60): ";
 	std::cin >> sec;
 	} while (sec < 0 || sec > 60);
 }
