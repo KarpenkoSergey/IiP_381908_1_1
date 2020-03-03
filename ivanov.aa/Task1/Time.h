@@ -1,4 +1,4 @@
-#ifndef TIME_H
+ï»¿#ifndef TIME_H
 #define TIME_H
 #include <iostream>
 
@@ -9,41 +9,41 @@ class Time {
 		int sec;
 
 	public:
-		//Êîíñòðóêòîðû
-		Time(); // Êîíñòðóêòîð ïî óìîë÷àíèþ
-		Time(const Time& c); // Êîíñòðóêòîð êîïèðîâàíèÿ
-		Time(int sec); // Êîíñòðóêòîð ïðåîáðàçîâàíèÿ òèïà 
-		Time(const char *str); // Êîíñòðóêòîð ïðåîáðàçîâàíèÿ òèïà äëÿ 11:11:11
-		Time(int h, int m, int s); // Êîíñòðóêòîð èíèöèàëèçàòîð
+		//ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€Ñ‹
+		Time(); // ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ
+		Time(const Time& c); // ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ
+		Time(int sec); // ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ Ñ‚Ð¸Ð¿Ð° 
+		Time(const char *str); // ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ Ñ‚Ð¸Ð¿Ð° Ð´Ð»Ñ 11:11:11
+		Time(int h, int m, int s); // ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ‚Ð¾Ñ€
 
-		//Äåñòðóêòîð
+		//Ð”ÐµÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€
 		~Time(); 
 
-		//Ìåòîäû
-		void TimeOut(void); // Âûâîä â ôîðìàòå 11:11:11
-		int GetHou() { return hou; } // Ïîëó÷åíèå êîë-âà ÷àñîâ
-		int GetMin() { return min; } // Ïîëó÷åíèå êîë-âà ìèíóò
-		int GetSec() { return sec; } // Ïîëó÷åíèå êîë-âà ñåêóíä
-		int TimeInSec() { return hou * 3600 + min * 60 + sec; } // Ïîëó÷åíèå âðåìåíè â ñåêóíäàõ ïîëíîñòüþ
-		void SetHou(int h) { hou = h % 24; } // Çàäàíèå êîë-âà ÷àñîâ
-		void SetMin(int m) { min = m % 60; } // Çàäàíèå êîë-âà ìèíóò
-		void SetSec(int s) { sec = s % 60; } // Çàäàíèå êîë-âà ñåêóíä
+		//ÐœÐµÑ‚Ð¾Ð´Ñ‹
+		void TimeOut(void); // Ð’Ñ‹Ð²Ð¾Ð´ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ 11:11:11
+		int GetHou() { return hou; } // ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð»-Ð²Ð° Ñ‡Ð°ÑÐ¾Ð²
+		int GetMin() { return min; } // ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð»-Ð²Ð° Ð¼Ð¸Ð½ÑƒÑ‚
+		int GetSec() { return sec; } // ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð»-Ð²Ð° ÑÐµÐºÑƒÐ½Ð´
+		int TimeInSec() { return hou * 3600 + min * 60 + sec; } // ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸ Ð² ÑÐµÐºÑƒÐ½Ð´Ð°Ñ… Ð¿Ð¾Ð»Ð½Ð¾ÑÑ‚ÑŒÑŽ
+		void SetHou(int h) { hou = h % 24; } // Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»-Ð²Ð° Ñ‡Ð°ÑÐ¾Ð²
+		void SetMin(int m) { min = m % 60; } // Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»-Ð²Ð° Ð¼Ð¸Ð½ÑƒÑ‚
+		void SetSec(int s) { sec = s % 60; } // Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð»-Ð²Ð° ÑÐµÐºÑƒÐ½Ð´
 
-		//Ïåðåãðóçêè
-		Time& operator= (const Time& c); // Ïåðåãðóçêà ïðèñâàèâàíèÿ
-		Time operator+ (const Time& c); // Ïåðåãðóçêà ñëîæåíèÿ äëÿ òîãî æå êëàññà
-		Time operator+ (int _sec); // Ïåðåãðóçêà ñëîæåíèÿ ñ ñåêóíäàìè
-		Time operator- (const Time& c); // Ïåðåãðóçêà âû÷èòàíèÿ äëÿ òîãî æå êëàññà
-		Time operator- (int _sec); // Ïåðåãðóçêà âû÷èòàíèÿ ñ ñåêóíäàìè
+		//ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ¸
+		Time& operator= (const Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð¿Ñ€Ð¸ÑÐ²Ð°Ð¸Ð²Ð°Ð½Ð¸Ñ
+		Time operator+ (const Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° ÑÐ»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð´Ð»Ñ Ñ‚Ð¾Ð³Ð¾ Ð¶Ðµ ÐºÐ»Ð°ÑÑÐ°
+		Time operator+ (int _sec); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° ÑÐ»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ñ ÑÐµÐºÑƒÐ½Ð´Ð°Ð¼Ð¸
+		Time operator- (const Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð²Ñ‹Ñ‡Ð¸Ñ‚Ð°Ð½Ð¸Ñ Ð´Ð»Ñ Ñ‚Ð¾Ð³Ð¾ Ð¶Ðµ ÐºÐ»Ð°ÑÑÐ°
+		Time operator- (int _sec); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð²Ñ‹Ñ‡Ð¸Ñ‚Ð°Ð½Ð¸Ñ Ñ ÑÐµÐºÑƒÐ½Ð´Ð°Ð¼Ð¸
 
-		bool operator> (const Time& c); // Ïåðåãðóçêà îïåðàöèè >
-		bool operator>= (const Time& c); // Ïåðåãðóçêà îïåðàöèè >=
-		bool operator< (const Time& c); // Ïåðåãðóçêà îïåðàöèè <
-		bool operator<= (const Time& c); // Ïåðåãðóçêà îïåðàöèè <=
-		bool operator== (const Time& c); // Ïåðåãðóçêà îïåðàöèè ==
+		bool operator> (const Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ >
+		bool operator>= (const Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ >=
+		bool operator< (const Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ <
+		bool operator<= (const Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ <=
+		bool operator== (const Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ ==
 
-		friend std::ostream& operator<< (std::ostream& out, Time& c); // Ïåðåãðóçêà <<
-		friend std::istream& operator>> (std::istream& in, Time& c); // Ïåðåãðóçêà >>
+		friend std::ostream& operator<< (std::ostream& out, Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° <<
+		friend std::istream& operator>> (std::istream& in, Time& c); // ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° >>
 };
 
 #endif
