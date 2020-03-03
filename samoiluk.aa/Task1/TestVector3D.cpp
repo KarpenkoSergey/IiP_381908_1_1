@@ -1,4 +1,4 @@
-#include <clocale>
+п»ї#include <clocale>
 #include <iostream>
 #include "Vector3D.h"
 using namespace std;
@@ -11,31 +11,31 @@ int main()
 	double scalar;
 	double scalMlt;
 
-	cout << "Введите координаты векторов:\n";
-	cout << "Вектор 1: ";
+	cout << "Р’РІРµРґРёС‚Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ РІРµРєС‚РѕСЂРѕРІ:\n";
+	cout << "Р’РµРєС‚РѕСЂ 1: ";
 	cin >> vector1;
-	cout << "Вектор 2: ";
+	cout << "Р’РµРєС‚РѕСЂ 2: ";
 	cin >> vector2;
-	cout << "Введите число: ";
+	cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ: ";
 	cin >> scalar;
 
-	vectorAdd = vector1 + vector2; // Сложение векторов
-	vectorSubt = vector1 - vector2; // Вычитание векторов
-	scalMlt = vector1 * vector2; // Скалярное произведение векторов
-	vectorMlt = scalar * vector1; // Умножение вектора на число
+	vectorAdd = vector1 + vector2; // РЎР»РѕР¶РµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ
+	vectorSubt = vector1 - vector2; // Р’С‹С‡РёС‚Р°РЅРёРµ РІРµРєС‚РѕСЂРѕРІ
+	scalMlt = vector1 * vector2; // РЎРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ
+	vectorMlt = scalar * vector1; // РЈРјРЅРѕР¶РµРЅРёРµ РІРµРєС‚РѕСЂР° РЅР° С‡РёСЃР»Рѕ
 
-	// Сравнение длин векторов
+	// РЎСЂР°РІРЅРµРЅРёРµ РґР»РёРЅ РІРµРєС‚РѕСЂРѕРІ
 	if (vector1 == vector2)
-		cout << "Векторы равны по длине" << endl;
+		cout << "Р’РµРєС‚РѕСЂС‹ СЂР°РІРЅС‹ РїРѕ РґР»РёРЅРµ" << endl;
 
 	if (vector1 > vector2)
-		cout << "Длина первого вектора больше длины второго" << endl;
+		cout << "Р”Р»РёРЅР° РїРµСЂРІРѕРіРѕ РІРµРєС‚РѕСЂР° Р±РѕР»СЊС€Рµ РґР»РёРЅС‹ РІС‚РѕСЂРѕРіРѕ" << endl;
 
 	if (vector1 < vector2)
-		cout << "Длина первого вектора меньше длины второго" << endl;
+		cout << "Р”Р»РёРЅР° РїРµСЂРІРѕРіРѕ РІРµРєС‚РѕСЂР° РјРµРЅСЊС€Рµ РґР»РёРЅС‹ РІС‚РѕСЂРѕРіРѕ" << endl;
 
-	cout << "Вектор сумма: " << vectorAdd << endl;
-	cout << "Вектор разность: " << vectorSubt << endl;
-	cout << "Скалярное произведение: " << scalMlt << endl;
-	cout << "Умножение вектора на число: " << vectorMlt << endl;
+	cout << "Р’РµРєС‚РѕСЂ СЃСѓРјРјР°: " << vectorAdd << endl;
+	cout << "Р’РµРєС‚РѕСЂ СЂР°Р·РЅРѕСЃС‚СЊ: " << vectorSubt << endl;
+	cout << "РЎРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ: " << scalMlt << endl;
+	cout << "РЈРјРЅРѕР¶РµРЅРёРµ РІРµРєС‚РѕСЂР° РЅР° С‡РёСЃР»Рѕ: " << vectorMlt << endl;
 }

@@ -1,16 +1,16 @@
-#include <clocale>
+п»ї#include <clocale>
 #include <iostream>
 #include "Vector3D.h"
 using namespace std;
 
-// Конструктор по умолчанию
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 Vector3D::Vector3D() {
 	x = 0;
 	y = 0;
 	z = 0;
 }
 
-// Перегрузка операции присваивания
+// РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
 Vector3D& Vector3D::operator=(const Vector3D& vec) {
 	x = vec.x;
 	y = vec.y;
@@ -18,7 +18,7 @@ Vector3D& Vector3D::operator=(const Vector3D& vec) {
 	return *this;
 }
 
-// Перегрузка операции сложения векторов
+// РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃР»РѕР¶РµРЅРёСЏ РІРµРєС‚РѕСЂРѕРІ
 Vector3D Vector3D::operator + (const Vector3D& vec) {
 	Vector3D res;
 	res.x = x + vec.x;
@@ -27,7 +27,7 @@ Vector3D Vector3D::operator + (const Vector3D& vec) {
 	return res;
 }
 
-// Перегрузка операции вычитания векторов
+// РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РІС‹С‡РёС‚Р°РЅРёСЏ РІРµРєС‚РѕСЂРѕРІ
 Vector3D Vector3D::operator - (const Vector3D& vec) {
 	Vector3D res;
 	res.x = x - vec.x;
@@ -36,7 +36,7 @@ Vector3D Vector3D::operator - (const Vector3D& vec) {
 	return res;
 }
 
-// Перегузка операции умножения вектора на число
+// РџРµСЂРµРіСѓР·РєР° РѕРїРµСЂР°С†РёРё СѓРјРЅРѕР¶РµРЅРёСЏ РІРµРєС‚РѕСЂР° РЅР° С‡РёСЃР»Рѕ
 Vector3D operator *(double scal, const Vector3D& vec) {
 	Vector3D res;
 	res.x = scal * vec.x;
@@ -45,7 +45,7 @@ Vector3D operator *(double scal, const Vector3D& vec) {
 	return res;
 }
 
-// Перегузка операции скалярного произведения векторов
+// РџРµСЂРµРіСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃРєР°Р»СЏСЂРЅРѕРіРѕ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ РІРµРєС‚РѕСЂРѕРІ
 double operator *(const Vector3D& vec1, const Vector3D& vec2) {
 	Vector3D res;
 	double mlt;
@@ -56,7 +56,7 @@ double operator *(const Vector3D& vec1, const Vector3D& vec2) {
 	return mlt;
 }
 
-// Перегрузка операций сранения вектоов по длине
+// РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёР№ СЃСЂР°РЅРµРЅРёСЏ РІРµРєС‚РѕРѕРІ РїРѕ РґР»РёРЅРµ
 bool Vector3D::operator ==(const Vector3D& vec) {
 	return sqrt(x * x + y * y + z * z) == sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
 }
@@ -69,13 +69,13 @@ bool Vector3D::operator <(const Vector3D& vec) {
 	return sqrt(x * x + y * y + z * z) < sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
 }
 
-// Вывод в поток
+// Р’С‹РІРѕРґ РІ РїРѕС‚РѕРє
 ostream& operator << (ostream& out, const Vector3D& vec) {
 	out << "x=" << vec.x << " " << "y=" << vec.y << " " << "z=" << vec.z;
 	return out;
 }
 
-// Ввод в поток
+// Р’РІРѕРґ РІ РїРѕС‚РѕРє
 istream& operator >> (istream& in, Vector3D& vec) {
 	cout << "x=";
 	in >> vec.x;

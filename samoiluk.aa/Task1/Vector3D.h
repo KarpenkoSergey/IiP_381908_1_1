@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 using namespace std;
 
 class Vector3D {
@@ -7,16 +7,16 @@ private:
 	double y;
 	double z;
 public:
-	Vector3D(); // Конструктор по умолчанию
-	Vector3D& operator = (const Vector3D& vec); // Перегрузка операции присваивания
-	Vector3D operator + (const Vector3D& vec); // Перегрузка операции сложения векторов
-	Vector3D operator - (const Vector3D& vec); // Перегрузка операции вычитания векторов
-	friend Vector3D operator *(double scal, const Vector3D& vec); // Перегузка операции умножения вектора на число
-	friend double operator * (const Vector3D& vec1, const Vector3D& vec2); // Перегузка операции скалярного произведения векторов
-	// Перегрузка операций сранения вектоов по длине
+	Vector3D(); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+	Vector3D& operator = (const Vector3D& vec); // РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
+	Vector3D operator + (const Vector3D& vec); // РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃР»РѕР¶РµРЅРёСЏ РІРµРєС‚РѕСЂРѕРІ
+	Vector3D operator - (const Vector3D& vec); // РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РІС‹С‡РёС‚Р°РЅРёСЏ РІРµРєС‚РѕСЂРѕРІ
+	friend Vector3D operator *(double scal, const Vector3D& vec); // РџРµСЂРµРіСѓР·РєР° РѕРїРµСЂР°С†РёРё СѓРјРЅРѕР¶РµРЅРёСЏ РІРµРєС‚РѕСЂР° РЅР° С‡РёСЃР»Рѕ
+	friend double operator * (const Vector3D& vec1, const Vector3D& vec2); // РџРµСЂРµРіСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃРєР°Р»СЏСЂРЅРѕРіРѕ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ РІРµРєС‚РѕСЂРѕРІ
+	// РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёР№ СЃСЂР°РЅРµРЅРёСЏ РІРµРєС‚РѕРѕРІ РїРѕ РґР»РёРЅРµ
 	bool operator ==(const Vector3D& vec);
 	bool operator >(const Vector3D& vec);
 	bool operator <(const Vector3D& vec);
-	friend ostream& operator << (ostream&, const Vector3D& vec); // Вывод в поток
-	friend istream& operator >> (istream&, Vector3D& vec); // Ввод в поток
+	friend ostream& operator << (ostream&, const Vector3D& vec); // Р’С‹РІРѕРґ РІ РїРѕС‚РѕРє
+	friend istream& operator >> (istream&, Vector3D& vec); // Р’РІРѕРґ РІ РїРѕС‚РѕРє
 };
