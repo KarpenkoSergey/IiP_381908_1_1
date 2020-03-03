@@ -19,6 +19,8 @@ int main()
 	cout << "Введите число: ";
 	cin >> scalar;
 
+	vector3 = vector1; // Присваивание вектору 3 значений координат вектора 1
+	vector4 = vector2; // Присваивание вектору 4 значений координат вектора 2
 	vectorAdd = vector1 + vector2; // Сложение векторов
 	vectorSubt = vector1 - vector2; // Вычитание векторов
 	scalMlt = vector1 * vector2; // Скалярное произведение векторов

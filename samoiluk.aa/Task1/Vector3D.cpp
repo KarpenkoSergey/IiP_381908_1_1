@@ -1,5 +1,6 @@
 ﻿#include <clocale>
 #include <iostream>
+#include <math.h>
 #include "Vector3D.h"
 using namespace std;
 
