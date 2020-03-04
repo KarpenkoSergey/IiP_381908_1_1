@@ -133,6 +133,17 @@ void Time::TimeOut(void)
 	return;
 }
 
+//__________________Возвращение времени в формате строки
+char* Time::TimeToString(void)
+{
+	char* str = new char[9];
+	str[8] = 0; str[2] = ':'; str[5] = ':';
+	str[0] = hou / 10 + '0'; str[1] = hou % 10 + '0';
+	str[3] = min / 10 + '0'; str[4] = min % 10 + '0';
+	str[6] = sec / 10 + '0'; str[7] = sec % 10 + '0';
+	return str;
+}
+
 //____________________________________Перегрузки
 
 //__________________Перегрузка присваивания
@@ -194,6 +205,35 @@ Time Time::operator-(int _sec)
 		tim += (-1 * tim / 86400 + 1) * 86400;
 	rs.hou = tim / 3600;
 	rs.min = (tim - hou * 3600) / 60;
+	rs.sec = tim % 60;
+	return rs;
+}
+
+//__________________Перегрузка умножения времени на какое-то целое число
+Time Time::operator* (int ti)
+{
+	Time rs;
+	rs.hou = hou * ti;
+	rs.min = min * ti;
+	rs.sec = sec * ti;
+
+	rs.min = rs.min + rs.sec / 60;
+	rs.sec = rs.sec % 60;
+	rs.hou = rs.hou + rs.min / 60;
+	rs.min = rs.min % 60;
+	rs.hou = rs.hou % 24;
+	return rs;
+}
+
+//__________________Перегрузка деления времени на какое-то целое число
+Time Time::operator/ (int de)
+{
+	Time rs;
+	int tim;
+	tim = hou * 3600 + min * 60 + sec;
+	tim = (int) tim / de;
+	rs.hou = tim / 3600;
+	rs.min = (tim - rs.hou * 3600) / 60;
 	rs.sec = tim % 60;
 	return rs;
 }

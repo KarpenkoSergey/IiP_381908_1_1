@@ -25,9 +25,10 @@ class Time {
 		int GetMin() { return min; } // Получение кол-ва минут
 		int GetSec() { return sec; } // Получение кол-ва секунд
 		int TimeInSec() { return hou * 3600 + min * 60 + sec; } // Получение времени в секундах полностью
-		void SetHou(int h) { hou = h % 24; } // Задание кол-ва часов
-		void SetMin(int m) { min = m % 60; } // Задание кол-ва минут
-		void SetSec(int s) { sec = s % 60; } // Задание кол-ва секунд
+		void SetHou(int h) { hou = h % 24; } // Задание кол-ва часов |(методы нужны, если требуется отдельно изменить
+		void SetMin(int m) { min = m % 60; } // Задание кол-ва минут |кол-во часов/минут/секунд)
+		void SetSec(int s) { sec = s % 60; } // Задание кол-ва секунд|
+		char* TimeToString(void); // Перевод времени в строку
 
 		//Перегрузки
 		Time& operator= (const Time& c); // Перегрузка присваивания
@@ -35,6 +36,8 @@ class Time {
 		Time operator+ (int _sec); // Перегрузка сложения с секундами
 		Time operator- (const Time& c); // Перегрузка вычитания для того же класса
 		Time operator- (int _sec); // Перегрузка вычитания с секундами
+		Time operator* (int ti); // Перегрузка умножения времени на какое-то целое число
+		Time operator/ (int de); // Перегрузка деления времени на какое-то целое число
 
 		bool operator> (const Time& c); // Перегрузка операции >
 		bool operator>= (const Time& c); // Перегрузка операции >=
