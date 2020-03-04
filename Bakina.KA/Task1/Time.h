@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include <cstdlib>
 #include <locale>
@@ -27,7 +27,7 @@ public:
 	bool operator!=(const Time& c);
 	friend ostream& operator<<(ostream& ostream, const Time& c);
 	friend istream& operator>>(istream& istream, Time& c);
-	//в задании не было этого, но на всякий случай
+	//РІ Р·Р°РґР°РЅРёРё РЅРµ Р±С‹Р»Рѕ СЌС‚РѕРіРѕ, РЅРѕ РЅР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№
 	void TinPut();
 	void ToutPut(const char* name);
 	int getHour();

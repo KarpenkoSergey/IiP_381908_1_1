@@ -1,17 +1,17 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <cstdlib>
 #include <locale>
 #include "Time.h"
 using namespace std;
 
-//конструктор по умолчанию
+//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 Time::Time()
 {
 	hou = 0;
 	min = 0;
 	sec = 0;
 }
-//конструктор копирования
+//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 Time::Time(const Time& t)
 {
 	hou = t.hou;
@@ -20,7 +20,7 @@ Time::Time(const Time& t)
 
 }
 
-//конструктор преобразования типа
+//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ С‚РёРїР°
 Time::Time(string t)
 {
 	hou = (t[0] - '0') * 10 + t[1] - '0';
@@ -30,7 +30,7 @@ Time::Time(string t)
 }
 
 
-//конструктор-инициализатор
+//РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ-РёРЅРёС†РёР°Р»РёР·Р°С‚РѕСЂ
 Time::Time(int _hou, int _min, int _sec)
 {
 	hou = _hou;
@@ -39,7 +39,7 @@ Time::Time(int _hou, int _min, int _sec)
 	(*this).perepol();
 }
 
-//деструктор
+//РґРµСЃС‚СЂСѓРєС‚РѕСЂ
 Time::~Time()
 {
 	hou = 0;
@@ -47,7 +47,7 @@ Time::~Time()
 	sec = 0;
 }
 
-//метод представления класса в виде строки
+//РјРµС‚РѕРґ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ РєР»Р°СЃСЃР° РІ РІРёРґРµ СЃС‚СЂРѕРєРё
 
 string Time::TimeToString()
 {
@@ -61,7 +61,7 @@ string Time::TimeToString()
 	return res;
 }
 
-//перегрузка операции присваивания
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
 Time& Time::operator=(const Time& c)
 {
 	hou = c.hou;
@@ -79,7 +79,7 @@ Time Time::perepol()
 	hou %= 24;
 	return *this;
 }
-//перегрузка операции сложения
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃР»РѕР¶РµРЅРёСЏ
 Time Time::operator+(const Time& c)
 {
 	Time res;
@@ -91,7 +91,7 @@ Time Time::operator+(const Time& c)
 }
 
 
-//перегрузка операции вычитания
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РІС‹С‡РёС‚Р°РЅРёСЏ
 Time Time::operator-(const Time& c)
 {
 	Time res;
@@ -123,7 +123,7 @@ Time Time::operator-(const Time& c)
 
 
 
-//перегрузка операции сравнения >
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃСЂР°РІРЅРµРЅРёСЏ >
 bool Time::operator>(const Time& c)
 {
 
@@ -148,7 +148,7 @@ bool Time::operator>(const Time& c)
 	}
 }
 
-//перегрузка операции сравнения <
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃСЂР°РІРЅРµРЅРёСЏ <
 bool Time::operator<(const Time& c)
 {
 	if (hou < c.hou)
@@ -173,13 +173,13 @@ bool Time::operator<(const Time& c)
 
 }
 
-//перегрузка операции сравнения ==
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃСЂР°РІРЅРµРЅРёСЏ ==
 bool Time::operator==(const Time& c)
 {
 	return hou == c.hou && min == c.min && sec == c.sec;
 }
 
-//перегрузка операции сравнения >=
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃСЂР°РІРЅРµРЅРёСЏ >=
 bool Time::operator>=(const Time& c)
 {
 	if (hou > c.hou)
@@ -203,7 +203,7 @@ bool Time::operator>=(const Time& c)
 	}
 }
 
-//перегрузка операции сравнения <=
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃСЂР°РІРЅРµРЅРёСЏ <=
 bool Time::operator<=(const Time& c)
 {
 	if (hou < c.hou)
@@ -227,19 +227,19 @@ bool Time::operator<=(const Time& c)
 	}
 }
 
-//перегрузка операции сравнения !=
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё СЃСЂР°РІРЅРµРЅРёСЏ !=
 bool Time::operator!=(const Time& c)
 {
 	return hou != c.hou && min != c.min && sec != c.sec;
 }
-//перегрузка операции вывода в поток
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РІС‹РІРѕРґР° РІ РїРѕС‚РѕРє
 ostream& operator<<(ostream& stream, const Time& c)
 {
 	stream << c.hou << ':' << c.min << ':' << c.sec << endl;
 	return stream;
 }
 
-//перегрузка операции ввода в потok
+//РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С†РёРё РІРІРѕРґР° РІ РїРѕС‚ok
 istream& operator>>(istream& stream, Time& c)
 {
 	stream >> c.hou >> c.min >> c.sec;;
@@ -257,15 +257,15 @@ void Time::ToutPut(const char* name)
 //inPut
 void Time::TinPut()
 {
-	cout << "введите часы (от 0 до 24)" << endl;
+	cout << "РІРІРµРґРёС‚Рµ С‡Р°СЃС‹ (РѕС‚ 0 РґРѕ 24)" << endl;
 
 	cin >> hou;
 
-	cout << "введите минуты (от 0 до 60)" << endl;
+	cout << "РІРІРµРґРёС‚Рµ РјРёРЅСѓС‚С‹ (РѕС‚ 0 РґРѕ 60)" << endl;
 
 	cin >> min;
 
-	cout << "введите секунды (от 0 до 60)" << endl;
+	cout << "РІРІРµРґРёС‚Рµ СЃРµРєСѓРЅРґС‹ (РѕС‚ 0 РґРѕ 60)" << endl;
 
 	cin >> sec;
 	(*this).perepol();
