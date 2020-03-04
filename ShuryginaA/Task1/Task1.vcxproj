@@ -124,6 +124,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Rational number.cpp" />
+    <ClCompile Include="RatNum_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RatNum.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

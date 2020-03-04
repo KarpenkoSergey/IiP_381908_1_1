@@ -1,43 +1,182 @@
-#include <iostream>
+п»ї#include <iostream>
 #include<clocale>
+#include <fstream>
+#include "RatNum.h"
 using namespace std;
 
-class Rational 
-{
-	int num;
-	int dem;
-public:
-	Rational();                 // Конструктор по умолчанию
-	Rational(const Rational& c);// Конструктор копирования
-	Rational(int _num, int _dem);// Конструктор инициализации
-	// type convertion
-	~Rational();   // Деструктор
-	void input();
-	void output();
-	void check(int n, int d);
-
-};
 Rational::Rational()
 {
-	num = 0;
-	dem = 1;
+	n = 0;
+	m = 1;
 }
 
 Rational::Rational(const Rational& c)
 {
-	num = c.num;
-	dem = c.dem;
+	n = c.n;
+	m = c.m;
 }
 
 Rational::Rational(int _num, int _dem)
 {
-	num = _num;
-	dem = _dem;
+	n = _num;
+	m = _dem;
 }
- 
+
+Rational::Rational(int _n)
+{
+	n = _n;
+	m = 1;
+}
+
 Rational::~Rational()
 {
-	num = 0;
-	dem = 1;
+	n = 0;
+	m = 1;
 }
-int main()
+
+void Rational::input()
+{
+	cout << "n = ";
+
+	cin >> n;
+	cout << "m = ";
+	cin >> m;
+	while (m == 0)
+	{
+		cout << "РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РґСЂРѕР±СЊ: РЅСѓР»РµРІРѕР№ Р·РЅР°РјРµРЅР°С‚РµР»СЊ" << endl;
+		cout << "n = ";
+		cin >> n;
+		cout << "m = ";
+		cin >> m;
+	} 
+	  
+	check();
+}
+void Rational::output(const char* name)
+{
+	cout << name << n << "/ " << m << endl;
+
+}
+
+void Rational::check()
+{
+	if (n == m)
+	{
+		n = 1;
+		m = 1;
+	}
+	else
+	{
+		int i = 2;
+		while (i <= n && i <= m)
+		{
+			if (n % i == 0 && m % i == 0)
+			{
+				n /= i;
+				m /= i;
+				i--;
+			}
+			i++;
+		}
+	}
+}
+
+Rational& Rational::operator =(const Rational& c)
+{
+	(*this).n = c.n; m = c.m;
+
+	return *this;
+}
+
+
+Rational Rational::operator*(const Rational& c)
+{
+	Rational res;
+	res.n = n * c.n;
+	res.m = m * c.m;
+	res.check();
+	
+
+	return res;
+}
+
+Rational Rational::operator/(const Rational& c)
+{
+	Rational res;
+	res.n = n * c.m;
+	res.m = m * c.n;
+	res.check();
+
+	return res;
+
+}
+
+Rational Rational::operator+(const Rational& c)
+{
+	Rational res;
+	res.m = m * c.m;
+	res.n = (res.m / m) * n + (res.m / c.m) * c.n;
+	res.check();
+	
+	return res;
+
+}
+
+
+Rational Rational::operator-(const Rational& c)
+{
+	Rational res;
+	res.m = m * c.m;
+	res.n = (res.m / m) * n - (res.m / c.m) * c.n;
+	res.check();
+
+	return res;
+
+}
+
+
+
+
+bool Rational::operator==(const Rational& c)
+{
+	bool res;
+	res = (n == c.n) && (m == c.m);
+	return res;
+}
+
+bool Rational::operator>(const Rational& c)
+{
+	int dem = m * c.m;
+	int num1 = (dem / m) * n;
+	int num2=(dem / c.m)* c.n;
+	return num1 > num2;
+
+}
+
+bool Rational::operator<(const Rational& c)
+{
+	int dem = m * c.m;
+	int num1 = (dem / m) * n;
+	int num2 = (dem / c.m) * c.n;
+	return num1 < num2;
+
+}
+
+
+std::ostream& operator<< (std::ostream& out, const Rational& c)
+{
+
+	out <<"Р”СЂРѕР±СЊ:" << c.n << "/ " << c.m;
+
+	return out;
+
+}
+
+std::istream& operator>> (std::istream& in, Rational& c)
+{
+
+	in >> c.n >> c.m;
+
+	return in;
+
+}
