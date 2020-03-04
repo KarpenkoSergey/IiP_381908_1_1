@@ -6,10 +6,16 @@ Vector3D ::Vector3D(void)
 {
 	x = 0; y = 0; z = 0;
 }
+Vector3D::Vector3D(double d)
+{
+	x = d;
+	y = 0;
+	z = 0;
+}
 Vector3D Vector3D :: operator=(const Vector3D& C)
 {
 	x = C.x; y = C.y; z = C.z;
-	return C;
+	return *this;
 }
 Vector3D Vector3D ::operator+(const Vector3D& C)
 {
@@ -28,16 +34,15 @@ Vector3D Vector3D ::operator-(const Vector3D& C)
 	res.z = z - C.z;
 	return res;
 }
-
-Vector3D  Vector3D ::operator*(const Vector3D& C)
+//Скалярное произведение векторов
+double  Vector3D ::sclprvect(const Vector3D& C)
 {
-	Vector3D res;
-	res.x = x * C.x;
-	res.y = y * C.y;
-	res.z = z * C.z;
+	double res;
+	res = x * C.x + y * C.y + z * C.z;
 	return res;
 }
-Vector3D Vector3D::sclumn(int m)
+//
+Vector3D Vector3D::umnnachislo(int m)
 {
 	Vector3D res;
 	res.x = x * m;
@@ -47,10 +52,10 @@ Vector3D Vector3D::sclumn(int m)
 }
 Vector3D Vector3D ::sravnenie(const Vector3D& C)
 {
-	if (sqrt(x ^ 2 + y ^ 2 + z ^ 2) > sqrt((C.x) ^ 2 + (C.y) ^ 2 + (C.z) ^ 2))
-		cout << "1 ������ ������ 2 "<< endl;
+	if(sqrt(x*x+y*y+z*z)>sqrt(C.x*C.x+C.y*C.y+C.z*C.z))
+		cout << "1 вектор больше 2 "<< endl;
 	else
-		cout << "2 ������ ������ 1" << endl;
+		cout << "2 вектор больше 1" << endl;
 	return C;
 }
 ostream& operator<<(ostream& stream, const Vector3D& C)
