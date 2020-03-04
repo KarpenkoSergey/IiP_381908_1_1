@@ -20,11 +20,11 @@ int main()
 	cout << "Разность векторов (V1-V2)" << endl;
 	cout << V1 - V2 << endl;
 	cout << "Произведение векторов(V1*V3)" << endl;
-	cout << V1 * V3 << endl;
+	cout << V1.sclprvect( V3) << endl;
 	cout << "Введите целое число" << endl;
 	cin >> k;
 	cout << "Умножение вектора на число(V1*k)" << endl;
-	cout << V1.sclumn(k) << endl;
+	cout << V1.umnnachislo(k) << endl;
 	cout << " Сравнение векторов (V1 and V3)" << endl;
 	cout << V1.sravnenie(V3) << endl;
 	return 0;
