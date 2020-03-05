@@ -1,12 +1,12 @@
 #include <iostream>
 #include"Money.h"
 Money::Money() {
-	rub = 0.0;
-	cop = 0.0;
+	rub = 0;
+	cop = 0;
 }
 Money::~Money() {
-	rub = 0.0;
-	cop = 0.0;
+	rub = 0;
+	cop = 0;
 }
 bool Money::operator<(const Money& c) {
 	return rub * 100 + cop < c.rub * 100 + c.cop;
@@ -24,7 +24,7 @@ Money Money::operator-(const Money& c) {
 	if (res.cop < 0)
 	{
 		res.rub--;
-		res.cop = abs(cop - c.cop);
+		res.cop += 100;
 	}
 	return res;
 }
@@ -68,15 +68,15 @@ Money Money::operator/(double c) {
 Money::Money(int _rub, int _cop) {
 	rub = _rub;
 	cop = _cop;
-	while (cop > 99)
+	if (_cop > 99)
 	{
-		rub++;
-		cop = cop - 100;
+		rub += cop / 100;
+		cop %= 100;
 	}
 }
 
 Money& Money::operator=(const Money& c) {
-	(*this).rub = c.rub;
+	rub = c.rub;
 	cop = c.cop;
 	return *this;
 }
@@ -128,7 +128,7 @@ Money Money::operator*(double c) {
 
 Money::Money(int d) {
 	rub = d;
-	cop = 0.0;
+	cop = 0;
 }
 
 
