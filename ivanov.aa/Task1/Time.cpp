@@ -124,12 +124,9 @@ Time::~Time()
 //__________________Вывод времени в формате 00:00:00
 void Time::TimeOut(void)
 {
-	char str[9];
-	str[8] = 0; str[2] = ':'; str[5] = ':';
-	str[0] = hou / 10 + '0'; str[1] = hou % 10 + '0';
-	str[3] = min / 10 + '0'; str[4] = min % 10 + '0';
-	str[6] = sec / 10 + '0'; str[7] = sec % 10 + '0';
+	char *str = TimeToString();
 	std::cout << str <<std::endl;
+	delete[] str;
 	return;
 }
 
@@ -142,6 +139,15 @@ char* Time::TimeToString(void)
 	str[3] = min / 10 + '0'; str[4] = min % 10 + '0';
 	str[6] = sec / 10 + '0'; str[7] = sec % 10 + '0';
 	return str;
+}
+
+//__________________Перевод секунд в нормальное представление
+void Time::SecToTime(int _sec)
+{
+	hou = _sec / 3600;
+	min = (_sec - hou * 3600) / 60;
+	sec = _sec % 60;
+	return;
 }
 
 //____________________________________Перегрузки
@@ -173,25 +179,19 @@ Time Time::operator+(int _sec)
 {
 	Time rs;
 	int ch = (hou * 3600 + min * 60 + sec + _sec) % 86400;
-	rs.hou = ch / 3600;
-	rs.min = (ch - hou * 3600) / 60;
-	rs.sec = ch % 60;
+	rs.SecToTime(ch);
 	return rs;
 }
 
 //__________________Перегрузка вычитания для того же класса
-Time Time::operator-(const Time& c)
+Time Time::operator-(Time& c)
 {
 	Time rs;
-	int tim1 = hou * 3600 + min * 60 + sec;
-	int tim2 = c.hou * 3600 + c.min * 60 + c.sec;
-	tim1 -= tim2;
+	int tim1 = this->TimeToSec(), tim2 = c.TimeToSec(); // Заменил hou * 3600 + min * 60 + sec; на закрытый метод, однако пришлось убрать const.
+	tim1 -= tim2;                                       // Я не уверен, можно ли так делать, поэтому не заменял везде
 	if (tim1 < 0)
 		tim1 += (-1 * tim1 / 86400 + 1) * 86400;
-	rs.hou = tim1 / 3600;
-	rs.min = (tim1- hou * 3600) / 60;
-	rs.sec = tim1 % 60;
-
+	rs.SecToTime(tim1);
 	return rs;
 }
 
@@ -199,13 +199,11 @@ Time Time::operator-(const Time& c)
 Time Time::operator-(int _sec)
 {
 	Time rs;
-	int tim = hou * 3600 + min * 60 + sec;
+	int tim = this->TimeToSec();
 	tim -= _sec;
 	if (tim < 0)
 		tim += (-1 * tim / 86400 + 1) * 86400;
-	rs.hou = tim / 3600;
-	rs.min = (tim - hou * 3600) / 60;
-	rs.sec = tim % 60;
+	rs.SecToTime(tim);
 	return rs;
 }
 
@@ -232,9 +230,7 @@ Time Time::operator/ (int de)
 	int tim;
 	tim = hou * 3600 + min * 60 + sec;
 	tim = (int) tim / de;
-	rs.hou = tim / 3600;
-	rs.min = (tim - rs.hou * 3600) / 60;
-	rs.sec = tim % 60;
+	rs.SecToTime(tim);
 	return rs;
 }
 
@@ -294,22 +290,22 @@ bool Time::operator==(const Time& c)
 }
 
 //__________________Перегрузка потокового вывода
-std::ostream& operator<<(std::ostream& out, Time& c)
+std::ostream& operator<<(std::ostream& out, const Time& c)
 {
-	if (c.GetHou() >= 0 && c.GetHou() <= 9)
-		out << "Время = " << "0" << c.GetHou() << ":";
+	if (c.hou >= 0 && c.hou <= 9)
+		out << "Время = " << "0" << c.hou << ":";
 	else
-		out << "Время = " << c.GetHou() << ":";
+		out << "Время = " << c.hou << ":";
 	
-	if (c.GetMin() >= 0 && c.GetMin() <= 9)
-		out << "0" << c.GetMin() << ":";
+	if (c.min >= 0 && c.min <= 9)
+		out << "0" << c.min << ":";
 	else
-		out << c.GetMin() << ":";
+		out << c.min << ":";
 
-	if (c.GetSec() >= 0 && c.GetSec() <= 9)
-		out << "0" << c.GetSec() << '\n';
+	if (c.sec >= 0 && c.sec <= 9)
+		out << "0" << c.sec << '\n';
 	else
-		out << c.GetSec() << '\n';
+		out << c.sec << '\n';
 	return out;
 }
 

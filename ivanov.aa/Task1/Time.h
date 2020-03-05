@@ -7,6 +7,8 @@ class Time {
 		int hou;
 		int min;
 		int sec;
+		void SecToTime(int _sec); // Перевод секунд в нормальное представление
+		int TimeToSec(void) { return (hou * 3600 + min * 60 + sec); } // Перевод времени в формате hou, min, sec в секунды
 
 	public:
 		//Конструкторы
@@ -34,7 +36,7 @@ class Time {
 		Time& operator= (const Time& c); // Перегрузка присваивания
 		Time operator+ (const Time& c); // Перегрузка сложения для того же класса
 		Time operator+ (int _sec); // Перегрузка сложения с секундами
-		Time operator- (const Time& c); // Перегрузка вычитания для того же класса
+		Time operator- (Time& c); // Перегрузка вычитания для того же класса
 		Time operator- (int _sec); // Перегрузка вычитания с секундами
 		Time operator* (int ti); // Перегрузка умножения времени на какое-то целое число
 		Time operator/ (int de); // Перегрузка деления времени на какое-то целое число
@@ -45,7 +47,7 @@ class Time {
 		bool operator<= (const Time& c); // Перегрузка операции <=
 		bool operator== (const Time& c); // Перегрузка операции ==
 
-		friend std::ostream& operator<< (std::ostream& out, Time& c); // Перегрузка <<
+		friend std::ostream& operator<< (std::ostream& out, const Time& c); // Перегрузка <<
 		friend std::istream& operator>> (std::istream& in, Time& c); // Перегрузка >>
 };
 
