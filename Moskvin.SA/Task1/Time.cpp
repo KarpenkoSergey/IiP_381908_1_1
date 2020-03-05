@@ -2,30 +2,37 @@
 #include <fstream>
 #include "Time.h"
 
-Time::Time() //  конструктор по умолчанию
+Time::Time() //  РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 {
 	hou = 0;
 	min = 0;
 	sec = 0;
 }
-Time::Time(int _hou, int _min, int _sec) // компилятор инициализаци
+Time::Time(int _hou, int _min, int _sec) // РєРѕРјРїРёР»СЏС‚РѕСЂ РёРЅРёС†РёР°Р»РёР·Р°С†Рё
 {
 	hou = _hou;
 	min = _min;
 	sec = _sec;
 }
-Time::Time(std::string time) // конструктор преобразования из типа string
+Time::Time(const Time& t)
 {
-	int i = 0; // счётчик символов
-	int n = 0; // счётчик чисел в строке
-	int tmp[3] = {0,0,0}; // массив чисел в строке
-	while (i <= 8) // разделение строки на числа и запись чисел в массив 
+	hou = t.hou;
+	min = t.min;
+	sec = t.sec;
+}
+
+Time::Time(std::string time) // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РёР· С‚РёРїР° string
+{
+	int i = 0; // СЃС‡С‘С‚С‡РёРє СЃРёРјРІРѕР»РѕРІ
+	int n = 0; // СЃС‡С‘С‚С‡РёРє С‡РёСЃРµР» РІ СЃС‚СЂРѕРєРµ
+	int tmp[3] = {0,0,0}; // РјР°СЃСЃРёРІ С‡РёСЃРµР» РІ СЃС‚СЂРѕРєРµ
+	while (i <= time.length()) // СЂР°Р·РґРµР»РµРЅРёРµ СЃС‚СЂРѕРєРё РЅР° С‡РёСЃР»Р° Рё Р·Р°РїРёСЃСЊ С‡РёСЃРµР» РІ РјР°СЃСЃРёРІ 
 	{
-		char a = time[i]; // берём один символ из строки
+		char a = time[i]; // Р±РµСЂС‘Рј РѕРґРёРЅ СЃРёРјРІРѕР» РёР· СЃС‚СЂРѕРєРё
 		if (time[i] != ':' && time[i] != '\0')
 		{
 			tmp[n] += (a - '0');
-			if (tmp[n] < 9) tmp[n] *= 10; // умножаем на 10 т.к. число во времени двузначное
+			if (tmp[n] < 9 && time[i + 1] >= '0' && time[i + 1] <= '9') tmp[n] *= 10; // СѓРјРЅРѕР¶Р°РµРј РЅР° 10 С‚.Рє. С‡РёСЃР»Рѕ РІРѕ РІСЂРµРјРµРЅРё РґРІСѓР·РЅР°С‡РЅРѕРµ
 		}
 		else
 		{
@@ -37,12 +44,12 @@ Time::Time(std::string time) // конструктор преобразования из типа string
 	min = tmp[1];
 	sec = tmp[2];
 } 
-Time::~Time() // деконструктор
+Time::~Time() // РґРµРєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 {
 	hou = 0; min = 0; sec = 0;
 }
 
-std::string Time::TextTime() // метод представления в виде строки
+std::string Time::TextTime() // РјРµС‚РѕРґ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ РІ РІРёРґРµ СЃС‚СЂРѕРєРё
 {
 	std::string str = "";
 	str += hou / 10 + '0';
@@ -128,7 +135,7 @@ bool Time::operator > (const Time& t)
 		return false;
 	if (hou == t.hou && min < t.min)
 		return false;
-	if (hou == t.hou && min == t.min && sec < t.sec)
+	if (hou == t.hou && min == t.min && sec <= t.sec)
 		return false;
 
 	return true;
@@ -136,7 +143,14 @@ bool Time::operator > (const Time& t)
 
 bool Time::operator <= (const Time& t)
 {
-	return sec <= t.sec && min <= t.min && hou <= t.hou;
+	if (hou > t.hou)
+		return false;
+	if (hou == t.hou && min > t.min)
+		return false;
+	if (hou == t.hou && min == t.min && sec > t.sec)
+		return false;
+
+	return true;
 }
 
 bool Time::operator >= (const Time& t)

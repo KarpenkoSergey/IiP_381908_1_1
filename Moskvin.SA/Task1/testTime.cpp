@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <clocale>
 #include "Time.h"
 using namespace std;
@@ -18,7 +18,7 @@ int main()
 	Time t2;
 	t2 = t1 + summa;
 	cout << t1.TextTime() << " + " << secondsum << " секунды = " << t2.TextTime() << endl;
-
+	
 	cout << "Введите секунды уменьшения времени: ";
 	int secondrazn = 0;// секунды для вырожения -
 	cin >> secondrazn;
@@ -26,22 +26,26 @@ int main()
 	Time t3;
 	t3 = t1 - raznost;
 	cout << t1.TextTime() <<  " - " << secondrazn << " секунды = " << t3.TextTime() << endl;
+	
+	Time t4(t1);
+	cout << t4.TextTime() << endl;
 
-	if (t2 <= t3) 
+	if (t2 <= t3)
 		cout << "true\n";
-	else 
+	else
 		cout << "false\n";
+
 
 
 	// Запись в поток
 	ofstream os; // поток для записи
-	os.open("time.txt"); // файл для записи
+	os.open("C:\\Users\\moskv\\source\\repos\\Task1_5\\time.txt"); // файл для записи
 	os << t2 << t3 << endl;
 	os.close();
 
 	// Чтение из потока
 	ifstream is; // поток для чтения
-	is.open("time.txt"); // файл для чтения
+	is.open("C:\\Users\\moskv\\source\\repos\\Task1_5\\time.txt"); // файл для чтения
 	is >> t2 >> t3;
 	cout << "t2: " << t2.TextTime() << endl;
 	cout << "t3: " << t3.TextTime();
