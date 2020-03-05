@@ -155,7 +155,14 @@ bool Time::operator <= (const Time& t)
 
 bool Time::operator >= (const Time& t)
 {
-	return sec >= t.sec && min >= t.min && hou >= t.hou;
+	if (hou < t.hou)
+		return false;
+	if (hou == t.hou && min < t.min)
+		return false;
+	if (hou == t.hou && min == t.min && sec < t.sec)
+		return false;
+
+	return true;
 }
 
 bool Time::operator == (const Time& t)
