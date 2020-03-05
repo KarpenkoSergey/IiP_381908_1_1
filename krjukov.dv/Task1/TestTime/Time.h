@@ -19,7 +19,9 @@ public:
 	bool operator==(const Time& t);
 	void showTime();
 	void enterTime();
-	
-
+	friend std::ostream& operator<< (std::ostream& stream, const Time& t);
+	friend std::istream& operator>> (std::istream& stream, Time& t);
 };
+std::ostream& operator<< (std::ostream& stream, const Time& t);
+std::istream& operator>> (std::istream& stream, Time& t);
 

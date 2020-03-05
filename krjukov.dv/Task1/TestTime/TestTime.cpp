@@ -18,6 +18,7 @@ int main()
     c1.showTime();
     c1 -= 500;
     c1.showTime();
-
+    std::cin >> c1;
+    std::cout << c1;
     
 }

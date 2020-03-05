@@ -165,3 +165,33 @@ void Time::enterTime()
 	std::cin >> sec;
 	} while (sec < 0 || sec > 60);
 }
+std::ostream& operator<< (std::ostream& stream, const Time& t)
+{
+
+	if (t.hou < 10)
+			stream << '0';
+	stream << t.hou << ':';
+	if (t.min < 10)
+		stream << '0';
+	stream << t.min << ':';
+	if (t.sec < 10)
+		stream << '0';
+	stream << t.sec << '\n';
+	return stream;
+}
+std::istream& operator>> (std::istream& stream, Time& t)
+{
+	do {
+		stream << "Hours(from 0 to 24): ";
+		stream >> t.hou;
+	} while (t.hou < 0 || t.hou > 24);
+	do {
+		stream << "Minutes(from 0 to 60): ";
+		stream >> t.min;
+	} while (t.min < 0 || t.min > 60);
+	do {
+		stream << "Seconds(from 0 to 60): ";
+		stream >> t.sec;
+	} while (t.sec < 0 || t.sec > 60);
+	return stream;
+}
