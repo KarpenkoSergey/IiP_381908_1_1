@@ -9,35 +9,13 @@ Money::~Money() {
 	cop = 0.0;
 }
 bool Money::operator<(const Money& c) {
-	if (rub < c.rub)
-	{
-		return 1;
-	}
-	if (cop < c.cop)
-	{
-		return 1;
-	}
-	return 0;
-
+	return rub * 100 + cop < c.rub * 100 + c.cop;
 }
 bool Money::operator>(const Money& c) {
-	if (rub > c.rub)
-	{
-		return 1;
-	}
-	if (cop > c.cop)
-	{
-		return 1;
-	}
-	return 0;
+	return rub * 100 + cop > c.rub * 100 + c.cop;
 }
 bool Money::operator==(const Money& c) {
-	bool res = 0;
-	if (rub == c.rub)
-	{
-		if (cop == c.cop) { res = 1; }
-	}
-	return res;
+	return rub * 100 + cop == c.rub * 100 + c.cop;
 }
 Money Money::operator-(const Money& c) {
 	Money res;

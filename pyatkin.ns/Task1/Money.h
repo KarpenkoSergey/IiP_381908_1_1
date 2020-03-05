@@ -21,13 +21,6 @@ public:
 	Money operator*(double c);
 	friend ostream& operator<<(ostream& stream, const Money& c);
 	friend istream& operator>>(istream& stream, Money& c);
-	friend bool operator==(const Money& left, const Money& right) {
-		if (left.rub == right.rub && left.cop == right.cop)
-		{
-			return true;
-		}
-		return false;
-	}
 private:
 	int rub;
 	int cop;
