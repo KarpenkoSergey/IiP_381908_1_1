@@ -7,7 +7,7 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	Vector3D vector1, vector2, vector3, vector4, vectorAdd, vectorSubt, vectorMlt;
+	Vector3D vector1, vector2, vector3(10.5, 13.2, 4.7), vector4(vector3), vectorAdd, vectorSubt, vectorMlt;
 	double scalar;
 	double scalMlt;
 
@@ -19,10 +19,8 @@ int main()
 	cout << "Введите число: ";
 	cin >> scalar;
 
-	vector3 = vector1; // Присваивание вектору 3 значений координат вектора 1
-	vector4 = vector2; // Присваивание вектору 4 значений координат вектора 2
-	vectorAdd = vector1 + vector2; // Сложение векторов
-	vectorSubt = vector1 - vector2; // Вычитание векторов
+	vectorAdd = vector2 + vector3; // Сложение векторов
+	vectorSubt = vector1 - vector4; // Вычитание векторов
 	scalMlt = vector1 * vector2; // Скалярное произведение векторов
 	vectorMlt = scalar * vector1; // Умножение вектора на число
 

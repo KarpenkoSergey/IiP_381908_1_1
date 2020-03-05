@@ -8,6 +8,9 @@ private:
 	double z;
 public:
 	Vector3D(); // Конструктор по умолчанию
+	Vector3D(const Vector3D& vec); // Копирование
+	Vector3D(double _x, double _y, double _z); // Инициализатор
+	~Vector3D(); // Деструктор 
 	Vector3D& operator = (const Vector3D& vec); // Перегрузка операции присваивания
 	Vector3D operator + (const Vector3D& vec); // Перегрузка операции сложения векторов
 	Vector3D operator - (const Vector3D& vec); // Перегрузка операции вычитания векторов

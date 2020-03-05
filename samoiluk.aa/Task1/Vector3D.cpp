@@ -11,6 +11,27 @@ Vector3D::Vector3D() {
 	z = 0;
 }
 
+// Копирование
+Vector3D::Vector3D(const Vector3D& vec) {
+	x = vec.x;
+	y = vec.y;
+	z = vec.z;
+}
+
+// Инициализатор
+Vector3D::Vector3D(double _x, double _y, double _z) {
+	x = _x;
+	y = _y;
+	z = _z;
+}
+
+// Деструктор
+Vector3D::~Vector3D() {
+	x = 0;
+	y = 0;
+	z = 0;
+}
+
 // Перегрузка операции присваивания
 Vector3D& Vector3D::operator=(const Vector3D& vec) {
 	x = vec.x;
