@@ -17,7 +17,7 @@ public:
 	string TimeToString();
 	Time& operator=(const Time& c);
 	Time operator+(const Time& c);
-	Time perepol();
+	void perepol();
 	Time operator-(const Time& c);
 	bool operator>(const Time& c);
 	bool operator<(const Time& c);

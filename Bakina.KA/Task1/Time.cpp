@@ -23,9 +23,24 @@ Time::Time(const Time& t)
 //конструктор преобразования типа
 Time::Time(string t)
 {
-	hou = (t[0] - '0') * 10 + t[1] - '0';
-	min = (t[3] - '0') * 10 + t[4] - '0';
-	sec = (t[6] - '0') * 10 + t[7] - '0';
+	int j = 0;
+	int dt[3] = { 0,0,0 };
+	for (int i = 0; i < 3; i++)
+	{
+		if (t[j + 1] != ':' && t[j + 1] != '\0')
+		{
+			dt[i] = (t[j] - '0') * 10 + t[j + 1] - '0';
+			j += 3;
+		}
+		else
+		{
+			dt[i] = t[j] - '0';
+			j += 2;
+		}
+	}
+	hou = dt[0];
+	min = dt[1];
+	sec = dt[2];
 	(*this).perepol();
 }
 
@@ -70,14 +85,13 @@ Time& Time::operator=(const Time& c)
 	return *this;
 }
 
-Time Time::perepol()
+void Time::perepol()
 {
 	min += sec / 60;
 	sec %= 60;
 	hou += min / 60;
 	min %= 60;
 	hou %= 24;
-	return *this;
 }
 //перегрузка операции сложения
 Time Time::operator+(const Time& c)
@@ -250,7 +264,7 @@ istream& operator>>(istream& stream, Time& c)
 void Time::ToutPut(const char* name)
 {
 
-	cout << name << ": hou = " << hou << ": min = " << min << ": sec = " << sec << endl;
+	cout << name << ": hou = " << hou << " min = " << min << " sec = " << sec << endl;
 
 }
 
