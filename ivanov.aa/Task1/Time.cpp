@@ -1,6 +1,7 @@
 ﻿#include "Time.h"
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 
 //___________________Конструктор по умолчанию
 Time::Time()
@@ -178,13 +179,13 @@ Time Time::operator+(const Time& c)
 Time Time::operator+(int _sec)
 {
 	Time rs;
-	int ch = (hou * 3600 + min * 60 + sec + _sec) % 86400;
+	int ch = (this->TimeToSec() + _sec) % 86400;
 	rs.SecToTime(ch);
 	return rs;
 }
 
 //__________________Перегрузка вычитания для того же класса
-Time Time::operator-(Time& c)
+Time Time::operator-(const Time& c)
 {
 	Time rs;
 	int tim1 = this->TimeToSec(), tim2 = c.TimeToSec(); // Заменил hou * 3600 + min * 60 + sec; на закрытый метод, однако пришлось убрать const.
@@ -228,7 +229,7 @@ Time Time::operator/ (int de)
 {
 	Time rs;
 	int tim;
-	tim = hou * 3600 + min * 60 + sec;
+	tim = this->TimeToSec();
 	tim = (int) tim / de;
 	rs.SecToTime(tim);
 	return rs;
@@ -237,8 +238,7 @@ Time Time::operator/ (int de)
 //__________________Перегрузка операции >
 bool Time::operator>(const Time& c)
 {
-	int tim1 = hou * 3600 + min * 60 + sec;
-	int tim2 = c.hou * 3600 + c.min * 60 + c.sec;
+	int tim1 = this->TimeToSec(), tim2 = c.TimeToSec();
 	if (tim1 > tim2)
 		return true;
 	else
@@ -248,8 +248,7 @@ bool Time::operator>(const Time& c)
 //__________________Перегрузка операции >=
 bool Time::operator>=(const Time& c)
 {
-	int tim1 = hou * 3600 + min * 60 + sec;
-	int tim2 = c.hou * 3600 + c.min * 60 + c.sec;
+	int tim1 = this->TimeToSec(), tim2 = c.TimeToSec();
 	if (tim1 >= tim2)
 		return true;
 	else
@@ -259,8 +258,7 @@ bool Time::operator>=(const Time& c)
 //__________________Перегрузка операции <
 bool Time::operator<(const Time& c)
 {
-	int tim1 = hou * 3600 + min * 60 + sec;
-	int tim2 = c.hou * 3600 + c.min * 60 + c.sec;
+	int tim1 = this->TimeToSec(), tim2 = c.TimeToSec();
 	if (tim1 < tim2)
 		return true;
 	else
@@ -270,8 +268,7 @@ bool Time::operator<(const Time& c)
 //__________________Перегрузка операции <=
 bool Time::operator<=(const Time& c)
 {
-	int tim1 = hou * 3600 + min * 60 + sec;
-	int tim2 = c.hou * 3600 + c.min * 60 + c.sec;
+	int tim1 = this->TimeToSec(), tim2 = c.TimeToSec();
 	if (tim1 <= tim2)
 		return true;
 	else
@@ -281,8 +278,7 @@ bool Time::operator<=(const Time& c)
 //__________________Перегрузка операции ==
 bool Time::operator==(const Time& c)
 {
-	int tim1 = hou * 3600 + min * 60 + sec;
-	int tim2 = c.hou * 3600 + c.min * 60 + c.sec;
+	int tim1 = this->TimeToSec(), tim2 = c.TimeToSec();
 	if (tim1 == tim2)
 		return true;
 	else
@@ -340,5 +336,19 @@ std::istream& operator>>(std::istream& in, Time& c)
 	c.hou = _hou;
 	c.min = _min;
 	c.sec = _sec;
+	return in;
+}
+
+//__________________Перегрузка вывода в файл
+std::ofstream& operator<<(std::ofstream& out, Time& c)
+{
+	out << c.hou << " " << c.min << " " << c.sec;
+	return out;
+}
+
+//__________________Перегрузка ввода из файла
+std::ifstream& operator>>(std::ifstream& in, Time& c)
+{
+	in >> c.hou >> c.min >> c.sec;
 	return in;
 }
