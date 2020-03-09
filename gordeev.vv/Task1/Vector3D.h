@@ -9,6 +9,9 @@ public:
 public:
 	Vector3D(void);
 	Vector3D(double d);
+	Vector3D(const Vector3D&C);
+	Vector3D(double _x, double _y, double _z);
+   ~Vector3D();
 	Vector3D operator=(const Vector3D& C);
 	Vector3D operator+(const Vector3D& C);
 	double sclprvect(const Vector3D& C);
