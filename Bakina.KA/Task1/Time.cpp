@@ -141,122 +141,70 @@ Time Time::operator-(const Time& c)
 bool Time::operator>(const Time& c)
 {
 
-	if (hou > c.hou)
-		return true;
-	else
-	{
-		if (hou == c.hou)
-			if (min > c.min)
-				return true;
-			else
-				if (min == c.min)
-					if (sec > c.sec)
-						return true;
-					else
-						return false;
-
-				else
-					return false;
-		else
-			return false;
-	}
+	int k1, k2;
+	k1 = hou * 3600 + min * 60 + sec;
+	k2 = c.hou * 3600 + c.min * 60 + c.sec;
+	return k1 > k2;
 }
 
 //перегрузка операции сравнения <
 bool Time::operator<(const Time& c)
 {
-	if (hou < c.hou)
-		return true;
-	else
-	{
-		if (hou == c.hou)
-			if (min < c.min)
-				return true;
-			else
-				if (min == c.min)
-					if (sec < c.sec)
-						return true;
-					else
-						return false;
-
-				else
-					return false;
-		else
-			return false;
-	}
+	int k1, k2;
+	k1 = hou * 3600 + min * 60 + sec;
+	k2 = c.hou * 3600 + c.min * 60 + c.sec;
+	return k1 < k2;
 
 }
 
 //перегрузка операции сравнения ==
 bool Time::operator==(const Time& c)
 {
-	return hou == c.hou && min == c.min && sec == c.sec;
+
+	int k1, k2;
+	k1 = hou * 3600 + min * 60 + sec;
+	k2 = c.hou * 3600 + c.min * 60 + c.sec;
+	return k1 == k2;
 }
 
 //перегрузка операции сравнения >=
 bool Time::operator>=(const Time& c)
 {
-	if (hou > c.hou)
-		return true;
-	else
-	{
-		if (hou == c.hou)
-			if (min > c.min)
-				return true;
-			else
-				if (min == c.min)
-					if (sec >= c.sec)
-						return true;
-					else
-						return false;
-
-				else
-					return false;
-		else
-			return false;
-	}
+	int k1, k2;
+	k1 = hou * 3600 + min * 60 + sec;
+	k2 = c.hou * 3600 + c.min * 60 + c.sec;
+	return k1 >= k2;
 }
 
 //перегрузка операции сравнения <=
 bool Time::operator<=(const Time& c)
 {
-	if (hou < c.hou)
-		return true;
-	else
-	{
-		if (hou == c.hou)
-			if (min < c.min)
-				return true;
-			else
-				if (min == c.min)
-					if (sec <= c.sec)
-						return true;
-					else
-						return false;
-
-				else
-					return false;
-		else
-			return false;
-	}
+	int k1, k2;
+	k1 = hou * 3600 + min * 60 + sec;
+	k2 = c.hou * 3600 + c.min * 60 + c.sec;
+	return k1 <= k2;
 }
 
 //перегрузка операции сравнения !=
 bool Time::operator!=(const Time& c)
 {
-	return hou != c.hou && min != c.min && sec != c.sec;
+	int k1, k2;
+	k1 = hou * 3600 + min * 60 + sec;
+	k2 = c.hou * 3600 + c.min * 60 + c.sec;
+	return k1 != k2;
 }
 //перегрузка операции вывода в поток
 ostream& operator<<(ostream& stream, const Time& c)
 {
-	stream << c.hou << ':' << c.min << ':' << c.sec << endl;
+	stream << c.hou << ' ' << c.min << ' ' << c.sec << endl;
 	return stream;
 }
 
 //перегрузка операции ввода в потok
 istream& operator>>(istream& stream, Time& c)
 {
-	stream >> c.hou >> c.min >> c.sec;;
+	stream >> c.hou >> c.min >> c.sec;
+	c.perepol();
 	return stream;
 }
 

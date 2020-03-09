@@ -1,12 +1,13 @@
 ﻿#include "Time.h"
 #include <locale>
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 int main()
 {
 	setlocale(LC_ALL, "Rus");
-	Time t1, t3(23, 14, 53), t4("12:43:50"), t5(t3), t6(12, 30, 30), t7(13, 6, 8);
+	Time t1, t3(23, 14, 53), t4("12:43:50"), t5(t3), t6(12, 30, 30), t7(13, 6, 8), t8;
 	string str1 = t3.TimeToString();
 	std::cout << "проверка оператора - (должно быть 0:0:0) " << t6 - t6;
 	std::cout << "проверка оператора + (должно быть 1:1:0) " << t6 + t6;
@@ -32,5 +33,12 @@ int main()
 	std::cout << "проверка оператора == (должно быть 1): " << tf << endl;
 	tf = t4 != t4;
 	std::cout << "проверка оператора != (должно быть 0): " << tf << endl;
+	ofstream strOut("file.txt");
+	strOut << t4;
+	strOut.close();
+	ifstream strIn("file.txt");
+	strIn >> t8;
+	strIn.close();
+	std::cout << "проверка корректности извлечения времени из файла (должно быть 12 43 50) " << t8;
 	return 0;
 }
