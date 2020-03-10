@@ -41,10 +41,10 @@ int main()
 	cout << "Умножение вектора на число: " << vectorMlt << endl;
 
 	ofstream fOut("result.txt");
-	fOut << "Вектор сумма: " << vectorAdd << endl;
-	fOut << "Вектор разность: " << vectorSubt << endl;
-	fOut << "Скалярное произведение: " << scalMlt << endl;
-	fOut << "Умножение вектора на число: " << vectorMlt << endl;
+	fOut << vectorAdd << endl;
+	fOut << vectorSubt << endl;
+	fOut << scalMlt << endl;
+	fOut << vectorMlt << endl;
 	fOut.close();
 
 	ifstream fIn("source.txt");
