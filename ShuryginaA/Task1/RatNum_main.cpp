@@ -39,21 +39,20 @@ int main()
 		cout << "Равны"<<endl;
 	else 
 		cout << "Не равны"<<endl;
-    // Запись в поток
-	ofstream os; 
-	os.open("complex.txt");
-	os << Client2 << Client3 << endl;
-	os.close();
+   
+	// запись в файл
+	ofstream strOut("RatNum.txt");
+	int _n=Client1.get_n();
+	int  _m=Client1.get_m();
+	strOut << _n << " " << " " << _m<<endl;
+	strOut.close();
 
-	// Чтение из потока 
-	ifstream is; 
-	is.open("complex.txt"); 
-	is >> Client1 >> Client4;
-	cout << "Дробь1: " << Client1;
-	cout << "Дробь2: " << Client4;
-	is.close();
-	
-	
+	//чтение из файла
+	ifstream strIn("RatNum.txt");
+	int Cl1_n, Cl1_m;
+	strIn >> Cl1_n >> Cl1_m;
+	cout << Cl1_n << "/" << Cl1_m;
+	strIn.close();
 	return 0;
 
 	

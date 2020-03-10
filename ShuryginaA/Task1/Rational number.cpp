@@ -163,20 +163,3 @@ bool Rational::operator<(const Rational& c)
 }
 
 
-std::ostream& operator<< (std::ostream& out, const Rational& c)
-{
-
-	out <<"Дробь:" << c.n << "/ " << c.m;
-
-	return out;
-
-}
-
-std::istream& operator>> (std::istream& in, Rational& c)
-{
-
-	in >> c.n >> c.m;
-
-	return in;
-
-}

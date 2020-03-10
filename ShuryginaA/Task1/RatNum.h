@@ -12,6 +12,12 @@ public:
 	void input();                // ввод дроби с контролем знаменателя
 	void output(const char* name);// вывод дроби
 	void check();                // проверка дроби на сократимость
+	int get_n() { return n; };
+	int get_m() { return m; };
+
+
+
+
 
 	Rational& operator =(const Rational& c);
 	Rational operator*(const Rational& c);
@@ -21,8 +27,6 @@ public:
 	bool operator==(const Rational& c);
 	bool operator>(const Rational& c);
 	bool operator<(const Rational& c);
-	friend std::ostream& operator<< (std::ostream& out, const Rational& point);
-	friend std::istream& operator>> (std::istream& in, Rational& point);
 	
 };
 
