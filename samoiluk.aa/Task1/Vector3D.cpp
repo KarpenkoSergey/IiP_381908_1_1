@@ -99,11 +99,6 @@ ostream& operator << (ostream& out, const Vector3D& vec) {
 
 // Ввод в поток
 istream& operator >> (istream& in, Vector3D& vec) {
-	cout << "x=";
-	in >> vec.x;
-	cout << "y=";
-	in >> vec.y;
-	cout << "z=";
-	in >> vec.z;
+	in >> vec.x >> vec.y >> vec.z;
 	return in;
 }
