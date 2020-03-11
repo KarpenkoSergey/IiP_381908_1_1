@@ -48,6 +48,12 @@ Time::~Time() // деконструктор
 {
 	hou = 0; min = 0; sec = 0;
 }
+int Time::ToSec(int hou, int min, int sec)
+{
+	int s;
+	s = hou * 3600 + min * 60 + sec;
+	return s;
+}
 
 std::string Time::TextTime() // метод представления в виде строки
 {
@@ -119,58 +125,30 @@ Time& Time::operator =(const Time& t)
 
 bool Time::operator < (const Time& t)
 {
-	if (hou > t.hou)
-		return false;
-	if (hou == t.hou && min > t.min)
-		return false;
-	if (hou == t.hou && min == t.min && sec >= t.sec)
-		return false;
-
-	return true;
+	return ToSec(hou, min, sec) < ToSec(t.hou, t.min, t.sec);
 }
 
 bool Time::operator > (const Time& t)
 {
-	if (hou < t.hou)
-		return false;
-	if (hou == t.hou && min < t.min)
-		return false;
-	if (hou == t.hou && min == t.min && sec <= t.sec)
-		return false;
-
-	return true;
+	return ToSec(hou, min, sec) > ToSec(t.hou, t.min, t.sec);
 }
 
 bool Time::operator <= (const Time& t)
 {
-	if (hou > t.hou)
-		return false;
-	if (hou == t.hou && min > t.min)
-		return false;
-	if (hou == t.hou && min == t.min && sec > t.sec)
-		return false;
-
-	return true;
+	return ToSec(hou, min, sec) <= ToSec(t.hou, t.min, t.sec);
 }
 
 bool Time::operator >= (const Time& t)
 {
-	if (hou < t.hou)
-		return false;
-	if (hou == t.hou && min < t.min)
-		return false;
-	if (hou == t.hou && min == t.min && sec < t.sec)
-		return false;
-
-	return true;
+	return ToSec(hou, min, sec) >= ToSec(t.hou, t.min, t.sec);
 }
 
 bool Time::operator == (const Time& t)
 {
-	return sec == t.sec && min == t.min && hou == t.hou;
+	return ToSec(hou, min, sec) == ToSec(t.hou, t.min, t.sec);
 }
 
-std::ostream& operator << (std::ostream& stream, Time& t)
+std::ostream& operator << (std::ostream& stream, const Time& t)
 {
 	stream << t.hou << " " << t.min << " " << t.sec << std::endl;
 	return stream;

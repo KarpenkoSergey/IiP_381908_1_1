@@ -29,8 +29,9 @@ int main()
 	
 	Time t4(t1);
 	cout << t4.TextTime() << endl;
+	
 
-	if (t2 <= t3)
+	if (t3 <= t2)
 		cout << "true\n";
 	else
 		cout << "false\n";
@@ -39,16 +40,16 @@ int main()
 
 	// Запись в поток
 	ofstream os; // поток для записи
-	os.open("C:\\Users\\moskv\\source\\repos\\Task1_5\\time.txt"); // файл для записи
+	os.open("time.txt"); // файл для записи
 	os << t2 << t3 << endl;
 	os.close();
-
+	Time c1, c2; // объекты ля проверки чтения из файла
 	// Чтение из потока
 	ifstream is; // поток для чтения
-	is.open("C:\\Users\\moskv\\source\\repos\\Task1_5\\time.txt"); // файл для чтения
-	is >> t2 >> t3;
-	cout << "t2: " << t2.TextTime() << endl;
-	cout << "t3: " << t3.TextTime();
+	is.open("time.txt"); // файл для чтения
+	is >> c1 >> c2;
+	cout << "t2: " << c1.TextTime() << endl;
+	cout << "t3: " << c2.TextTime();
 	is.close();
 
 	return 0;

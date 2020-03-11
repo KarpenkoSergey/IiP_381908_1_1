@@ -6,6 +6,7 @@ class Time
 {
 private:
 	int hou, min, sec;
+	int ToSec(int hou, int min, int sec); // перевод в секунды
 public:
 	Time(); // по умолчанию
 	Time(int _hou, int _min, int _sec); // инициализация
@@ -21,9 +22,9 @@ public:
 	bool operator <= (const Time& t);
 	bool operator >= (const Time& t);
 	bool operator == (const Time& t);
-	friend std::ostream& operator << (std::ostream& stream, Time& t); // при const Time& t выдаёт ошибку "неразрешённых внешних элементов:1"
+	friend std::ostream& operator << (std::ostream& stream, const Time& t); 
 	friend std::istream& operator >> (std::istream& stream, Time& t);
 };
 
-std::ostream& operator << (std::ostream& stream, Time& t);
+std::ostream& operator << (std::ostream& stream, const Time& t);
 std::istream& operator >> (std::istream& stream, Time& t);
