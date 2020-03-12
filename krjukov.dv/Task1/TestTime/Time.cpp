@@ -1,5 +1,6 @@
 #include "Time.h"
 #include <iostream>
+#include <fstream>
 Time::Time()
 {
 	hou = 0; min = 0;  sec = 0;
@@ -64,12 +65,12 @@ Time Time::operator+(const Time& t)
 }
 Time& Time::operator+=(int _sec)
 {
-	sec += _sec;
-	min += sec / 60;
-	hou += min / 60;
-	sec %= 60;
-	min %= 60;
-	hou %= 24;
+	int a = (hou * 60 + min) * 60 + sec;
+	a += _sec;
+	hou = (a / 3600) % 24;
+	min = a % 3600 / 60;
+	sec = a % 60;
+	return (*this);
 	return (*this);
 }
 Time Time::operator-(const Time& t)
@@ -94,103 +95,64 @@ Time Time::operator-(const Time& t)
 }
 Time& Time::operator-=(int _sec)
 {
-	sec -= _sec;
-	if (sec < 0)
-	{
-	min += (sec / 60 - 1);
-	sec -= (sec / 60 - 1) * 60;
-	}
-	if (min < 0)
-	{
-		hou += (min / 60 - 1);
-		min -= (min / 60 - 1) * 60;
-	}
-	if (hou < 0)
-	{
-		hou -= (hou / 24 - 1) * 24;
-	}
+	int a = (hou * 60 + min) * 60 + sec;
+	a -= _sec;
+	while (a < 0) a += 24 * 60 * 60;
+	hou = a / 3600;
+	min = a % 3600 / 60;
+	sec = a % 60;
 	return (*this);
 }
 bool Time::operator<(const Time& t)
 {
-	if (hou == t.hou)
-		if (min == t.min)
-			return sec < t.sec;
-		else
-			return min < t.min;
-	else
-		return hou < t.hou;
+	return (hou * 60 + min) * 60 + sec < (t.hou * 60 + t.min) * 60 + t.sec;
 }
 bool Time::operator>(const Time& t)
 {
-	if (hou != t.hou)
-		return hou > t.hou;
-	else
-		if (min != t.min)
-			return min > t.min;
-		else
-			return sec > t.sec;
+	return (hou * 60 + min) * 60 + sec > (t.hou * 60 + t.min) * 60 + t.sec;
 		
 }
 bool Time::operator==(const Time& t)
 {
 	return (hou == t.hou) && (min == t.min) && (sec == t.sec);
 }
-void Time::showTime()
+void Time::readTime()
 {
-	if (hou < 10)
-		std::cout << '0';
-	std::cout << hou << ':';
-	if (min < 10)
-		std::cout << '0';
-	std::cout << min << ':';
-	if (sec < 10)
-		std::cout << '0';
-	std::cout << sec << '\n';
-
-	return;
+	std::ifstream strIn("Time.txt");
+	strIn >> hou >> min >> sec;
+	strIn.close();
 }
-void Time::enterTime()
+void Time::writeTime()
 {
-	do {
-		std::cout << "Hours(from 0 to 24): ";
-		std::cin >> hou;
-	} while (hou < 0 || hou > 24);
-	do {
-		std::cout << "Minutes(from 0 to 60): ";
-		std::cin >> min;
-	} while (min < 0 || min > 60);
-	do{
-	std::cout << "Seconds(from 0 to 60): ";
-	std::cin >> sec;
-	} while (sec < 0 || sec > 60);
+	std::ofstream strOut("Time.txt");
+	strOut << hou << " " << min << " " << sec << std::endl;
+	strOut.close();
 }
 std::ostream& operator<< (std::ostream& stream, const Time& t)
 {
 
 	if (t.hou < 10)
-			stream << '0';
+		stream << '0';
 	stream << t.hou << ':';
 	if (t.min < 10)
 		stream << '0';
 	stream << t.min << ':';
 	if (t.sec < 10)
 		stream << '0';
-	stream << t.sec << '\n';
+	stream << t.sec << std::endl;
 	return stream;
 }
 std::istream& operator>> (std::istream& stream, Time& t)
 {
 	do {
-		stream << "Hours(from 0 to 24): ";
+		
 		stream >> t.hou;
 	} while (t.hou < 0 || t.hou > 24);
 	do {
-		stream << "Minutes(from 0 to 60): ";
+		
 		stream >> t.min;
 	} while (t.min < 0 || t.min > 60);
 	do {
-		stream << "Seconds(from 0 to 60): ";
 		stream >> t.sec;
 	} while (t.sec < 0 || t.sec > 60);
 	return stream;
