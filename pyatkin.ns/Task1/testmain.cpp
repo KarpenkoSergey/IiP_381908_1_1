@@ -35,5 +35,6 @@ int main() {
 	ifstream in("test.txt");
 	in >> c2;
 	in >> c1;
+	in.close();
 	return 0;
 }
