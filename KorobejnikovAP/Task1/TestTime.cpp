@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Time.h"
+#include <fstream>
 using namespace  std;
 int main() {
 	Time t1,t2(t1),t3("12:20:14"),t4(1,5,55);
@@ -16,4 +17,11 @@ int main() {
 		cout << "yes" << endl;
 	Time p(23, 00, 15), k(23, 0, 16);
 	cout << p - k;
+	ofstream strOut("time.txt");
+	strOut << t4;
+	strOut.close();
+	ifstream strIn("time.txt");
+	strIn >> t4;
+	strIn.close();
+	return 0;
 }

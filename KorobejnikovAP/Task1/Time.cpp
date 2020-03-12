@@ -10,9 +10,25 @@ Time::Time(const Time& t) {
 	hou = t.hou; min = t.min; sec = t.sec;
 }
 Time::Time(string s) {
-	hou = (s[0] - '0') * 10 + (s[1] - '0');
-	min = (s[3] - '0') * 10 + (s[4] - '0');
-	sec = (s[6] - '0') * 10 + (s[7] - '0');
+	hou = 0; min = 0; sec = 0;
+	int i = 0;
+	while (s[i] != ':')
+	{
+		hou = hou * 10 + s[i] - '0';
+		++i;
+	}
+	++i;
+	while (s[i] != ':')
+	{
+		min = min * 10 + s[i] - '0';
+		++i;
+	}
+	++i;
+	while (s[i] != 0)
+	{
+		sec = sec * 10 + s[i] - '0';
+		++i;
+	}
 }
 Time::Time(int _hou, int _min,int _sec) {
 	hou = _hou; min = _min, sec = _sec;
@@ -100,15 +116,7 @@ bool Time::operator ==(const Time& t) {
 	return hou == t.hou && min == t.min && sec == t.sec;
 }
 ostream& operator << (ostream& out , const Time& t) {
-	if (t.hou > 9)
-		out << t.hou << ":";
-	else out << "0" << t.hou << ":";
-	if (t.min > 9)
-		out << t.min << ":";
-	else out << "0" << t.min << ":";
-	if (t.sec > 9)
-		out << t.sec ;
-	else out << "0" << t.sec ;
+	out << t.hou << ' ' << t.min << ' ' << t.sec;
 	return out;
 }
 istream& operator >> (istream& in, Time& t) {
