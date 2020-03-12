@@ -123,3 +123,43 @@ istream& operator >> (istream& in, Time& t) {
 	in >> t.hou >> t.min >> t.sec;
 	return in;
 }
+Time Time:: operator + (int _sec) {
+	Time res;
+	if (sec + _sec < 60) {
+		res.hou = hou;
+		res.min = min;
+		res.sec = sec + _sec;
+	}
+	else {
+		res.sec = (sec + _sec) % 60;
+		res.min = min + (sec + _sec) / 60;
+		if (res.min > 60) {
+			res.hou = hou + res.min / 60;
+			res.min %= 60;
+		}
+		if (res.hou >= 24)
+			res.hou = res.hou - 24;
+	}	
+	return res;
+}
+Time Time:: operator - (int _sec) {
+	Time res;
+	int tsec = (sec + min * 60 + hou * 60 * 60);
+	if (_sec < tsec) {
+		tsec -= _sec;
+		res.hou = tsec / 3600;
+		tsec -= res.hou * 3600;
+		res.min = tsec / 60;
+		tsec -= res.min * 60;
+		res.min = tsec;
+	}
+	else {
+		tsec = (3600 * 24 + tsec) - (_sec % 3600 * 24);
+		res.hou = tsec / 3600;
+		tsec -= res.hou * 3600;
+		res.min = tsec / 60;
+		tsec -= res.min * 60;
+		res.min = tsec;
+	}
+	return res;
+}

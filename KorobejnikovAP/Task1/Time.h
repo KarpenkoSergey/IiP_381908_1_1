@@ -16,7 +16,9 @@ class Time {
 		string ToString();
 		Time& operator = (const Time& t);
 		Time operator + (const Time& t);
+		Time operator + (int _sec);
 		Time operator - (const Time& t);
+		Time operator - (int _sec);
 		bool operator > (const Time& t);
 		bool operator < (const Time& t);
 		bool operator == (const Time& t);
