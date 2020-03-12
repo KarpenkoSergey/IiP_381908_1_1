@@ -1,5 +1,8 @@
 #include <iostream>
 #include"Money.h"
+#include <fstream>
+#include<string>
+using namespace std;
 Money::Money() {
 	rub = 0;
 	cop = 0;
@@ -17,6 +20,27 @@ bool Money::operator>(const Money& c) {
 bool Money::operator==(const Money& c) {
 	return rub * 100 + cop == c.rub * 100 + c.cop;
 }
+Money Money::out(const std::string& filename) const {
+	std::fstream file;
+	file.open(filename, std::fstream::out);
+	if (file.is_open()) {
+		file << *this;
+	}
+	else {
+		throw std::invalid_argument("Can not open file: " + filename);
+	}
+}
+Money Money::in(const std::string& filename) {
+	std::fstream file;
+	file.open(filename, std::ostream::in);
+	if (file.is_open()) {
+		file >> *this;
+	}
+	else {
+		throw std::invalid_argument("Can not open file: " + filename);
+	}
+}
+
 Money Money::operator-(const Money& c) {
 	Money res;
 	res.rub = rub - c.rub;

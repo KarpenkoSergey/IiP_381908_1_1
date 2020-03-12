@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-
+#include <fstream>
 using namespace std;
 
 class Money {
@@ -10,6 +10,8 @@ public:
 	Money(const Money& c);
 	Money(int d);
 	~Money();
+	Money out(const std::string& filename) const;
+	Money in(const std::string& filename);
 	Money operator +(const Money& c);
 	void output();
 	Money& operator = (const Money& c);

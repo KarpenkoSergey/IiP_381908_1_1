@@ -28,7 +28,12 @@ int main() {
 
 	Money* pc1 = new Money(c1);
 	delete pc1;
-
-
+	ofstream out("test.txt");
+	out << c1 << endl;
+	out << c2 << endl;
+	out.close();
+	ifstream in("test.txt");
+	in >> c2;
+	in >> c1;
 	return 0;
 }
