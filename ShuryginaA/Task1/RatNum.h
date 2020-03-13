@@ -27,6 +27,8 @@ public:
 	bool operator==(const Rational& c);
 	bool operator>(const Rational& c);
 	bool operator<(const Rational& c);
+	friend std::ostream& operator<< (std::ostream& out, const Rational& point);
+	friend std::istream& operator>> (std::istream& in, Rational& point);
 	
 };
 

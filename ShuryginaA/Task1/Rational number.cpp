@@ -135,8 +135,6 @@ Rational Rational::operator-(const Rational& c)
 }
 
 
-
-
 bool Rational::operator==(const Rational& c)
 {
 	bool res;
@@ -159,6 +157,24 @@ bool Rational::operator<(const Rational& c)
 	int num1 = (dem / m) * n;
 	int num2 = (dem / c.m) * c.n;
 	return num1 < num2;
+
+}
+
+std::ostream& operator<< (std::ostream& out, const Rational& c)
+{
+
+	out << c.n << c.m;
+
+	return out;
+
+}
+
+std::istream& operator>> (std::istream& in, Rational& c)
+{
+
+	in >> c.n >> c.m;
+
+	return in;
 
 }
 

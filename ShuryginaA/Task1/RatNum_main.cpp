@@ -1,5 +1,5 @@
-﻿#include <iostream>
-#include<clocale>
+﻿#include <iostream> 
+#include <clocale>
 #include <fstream>
 #include "RatNum.h"
 using namespace std;
