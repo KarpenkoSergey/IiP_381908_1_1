@@ -30,5 +30,6 @@ public:
 	friend std::ostream& operator<< (std::ostream& out, const Rational& point);
 	friend std::istream& operator>> (std::istream& in, Rational& point);
 	
+
 };
 
