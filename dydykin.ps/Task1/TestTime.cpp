@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Time.h"
+#include <fstream>
 #include <locale>
 using namespace std;
 int main()
@@ -17,7 +18,13 @@ int main()
 	cout << t7 << endl;
 	if ((t2 == t1) && (t3 < t4))
 		cout << "Верно" << endl;
-	Time a(11, 19, 35), b("11,19,50");
+	Time a(11, 19, 35), b("11:19:50");
 	cout << a - b << endl;
+	ofstream strOut("Time.txt");
+	strOut << t3;
+	strOut.close();
+	ifstream strIn("Time.txt");
+	strIn >> t3;
+	strIn.close();
 	return 0;
 }
