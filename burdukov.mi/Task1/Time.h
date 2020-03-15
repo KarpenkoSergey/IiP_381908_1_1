@@ -1,4 +1,4 @@
-//Code written by Burdukov Mikhail 
+ï»¿//Code written by Burdukov Mikhail 
 //Task 1 Number 5 
 #pragma once
 #include<iostream>
@@ -9,19 +9,26 @@ class Time
 	int sec, min, hour;
 
 public:
-	//êîíñòóêòîðû è äåêîíñòðóêòîð 
+	//ÐºÐ¾Ð½ÑÑ‚ÑƒÐºÑ‚Ð¾Ñ€Ñ‹ Ð¸ Ð´ÐµÐºÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ 
 	Time();
 	Time(const Time &c);
 	Time(const char* str);
 	Time(int h,int m,int s);
 	~Time();
 
-	//Ìåòîäû è ïåðåãðóçêè
+	//ÐœÐµÑ‚Ð¾Ð´Ñ‹ Ð¸ Ð¿ÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ¸
 	 char* ConvertToStr();
 	 void Give(int h, int m, int s);
 	 Time& operator=(const Time& c);
+	 //ÑÐ»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ñ Ð´Ñ€ÑƒÐ³Ð¸Ð¼ Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð¼
 	 Time operator+(const Time& c);
 	 Time operator-(const Time& c);
+	 //ÑÐ»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ñ ÐºÐ¾Ð»-Ð²Ð¾ ÑÐµÐº
+	 Time operator+(int seconds);
+	 Time operator-(int seconds);
+
+	 void deleteMemory(char* str);
+
 	 bool operator==(const Time& c);
 	 bool	operator >(const Time& c);
 	 bool	operator <(const Time& c);
