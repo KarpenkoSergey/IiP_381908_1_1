@@ -1,14 +1,14 @@
-//Code written by Burdukov Mikhail 
+п»ї//Code written by Burdukov Mikhail 
 //Task 1 Number 5 
 #include<iostream>
 #include<stdio.h>
 #include<string.h>
 #include"Time.h"
 
-//Вспомогательные функции
+//Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
 
 
-//констукторы и деконстуктор
+//РєРѕРЅСЃС‚СѓРєС‚РѕСЂС‹ Рё РґРµРєРѕРЅСЃС‚СѓРєС‚РѕСЂ
 Time::Time() {
 	hour = 0;
 	sec = 0;
@@ -21,10 +21,28 @@ Time::Time(const Time& c) {
 	min = c.min;
 }
 
-Time::Time(const char* str) { //поддерживает только строгий формат hh:mm:ss
-	hour = (str[0] - '0') * 10 + (str[1]-'0');
-	min = (str[3] - '0') * 10 + (str[4] - '0');
-	sec = (str[6] - '0') * 10 + (str[7] - '0');
+Time::Time(const char* str) { //РїРѕРґРґРµСЂР¶РёРІР°РµС‚ С‚РѕР»СЊРєРѕ СЃС‚СЂРѕРіРёР№ С„РѕСЂРјР°С‚ hh:mm:ss
+	int i = 0,buf=0;
+	while (str[i] != ':') {
+		buf = buf * 10 + str[i] - '0';
+		i++;
+	}
+	i++;
+	hour = buf;
+	buf = 0;
+	while (str[i] != ':') {
+		buf = buf * 10 + str[i] - '0';
+		i++;
+	}
+	min = buf;
+	buf = 0;
+	i++;
+	while (str[i] != NULL) {
+		buf = buf * 10 + str[i] - '0';
+		i++;
+	}
+	sec = buf;
+	buf = 0;
 }
 
 Time::Time(int h, int m, int s) {
@@ -39,7 +57,7 @@ Time::~Time() {
 	sec = 0;
 }
 
-// Методы и перегрузки
+// РњРµС‚РѕРґС‹ Рё РїРµСЂРµРіСЂСѓР·РєРё
 void Time::Give(int h,int m,int s) {
 	hour = h;
 	min = m;
@@ -47,7 +65,7 @@ void Time::Give(int h,int m,int s) {
 }
 
 char* Time::ConvertToStr() {
-	char* str=new char[8];
+	char* str= new char[9];
 	str[0] = hour / 10 + '0';
 	str[1] = hour % 10 + '0';
 	str[2] = ':';
@@ -58,6 +76,10 @@ char* Time::ConvertToStr() {
 	str[7] =sec % 10 + '0';
 	str[8] = NULL;
 	return str;
+}
+
+void Time::deleteMemory(char* str) {
+	delete[] str;
 }
 
 Time& Time::operator=(const Time& c) {
@@ -105,6 +127,30 @@ Time Time::operator-(const Time& c) {
 	return res;
 }
 
+Time Time::operator-(int seconds) {
+	int buff = hour * 3600 + min * 60 + sec;
+	buff -= seconds;
+	if (buff < 0) buff += 3600 * 24;
+	Time res;
+	res.hour = buff / 3600;
+	buff %= 3600;
+	res.min = buff / 60;
+	res.sec = buff % 60;
+	return res;
+}
+
+Time Time::operator+(int seconds) {
+	int buff = hour * 3600 + min * 60 + sec;
+	buff += seconds;
+	buff%=(3600 * 24);
+	Time res;
+	res.hour = (buff / 3600)%24;
+	buff %= 3600;
+	res.min = buff / 60;
+	res.sec = buff % 60;
+	return res;
+}
+
 bool Time::operator==(const Time& c) {
 	return c.hour == hour && c.min == min && c.sec == sec;
 }
@@ -134,18 +180,13 @@ bool Time::operator!=(const Time& c) {
 }
 
 std::ostream& operator<< (std::ostream& out, const Time& c) {
-	out << "hours= " << c.hour << " min= " << c.min << " sec= " << c.sec;
+	out <<c.hour <<' '<< c.min <<' '<< c.sec<<' ';
 	return out;
 }
 
 std::istream& operator>> (std::istream& in, Time& c) {
 	int h, m, s;
-	std::cout <<"Hours= ";
-	in >> h;
-	std::cout << "Minutes= ";
-	in >> m;
-	std::cout << "Sec= ";
-	in >> s;
+	in >> h >> m >> s;
 	c = { h,m,s };
 	return in;
 }
