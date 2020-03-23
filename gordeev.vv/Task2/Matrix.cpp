@@ -11,10 +11,7 @@ Matrix::Matrix(void)
 }
 Matrix::Matrix(int _size) 
 {
-	size = _size;
-	mtx = new int* [size];
-	for (int i = 0; i < size; ++i)
-		mtx[i] = new int[size];
+	array2(_size);
 }
 //Конструктор инициализатор
 Matrix::Matrix(int _size, int fill)
@@ -31,10 +28,7 @@ Matrix::Matrix(int _size, int fill)
 //Конструктор копирования
 Matrix::Matrix(const Matrix& matrix)
 {
-	size = matrix.size;
-	mtx = new int* [size];
-	for (int i = 0; i < size; ++i)
-		mtx[i] = new int[size];
+	array2(matrix.size);
 
 	for (int i = 0; i < size; ++i)
 		for (int j = 0; j < size; ++j)
@@ -59,7 +53,7 @@ Matrix Matrix::operator=(const Matrix& matrix)
 	}
 	else
 	{
-		cout << "Присваивание невозможно из-за разного размера матриц" << endl;		
+		throw MatrixExeption(wrongsize, size);
 	}
 	return *this;
 }
@@ -75,7 +69,7 @@ Matrix Matrix:: operator+(const Matrix& matrix)
 	}
 	else
 	{
-		cout << "Сложение невозможно из-за разного размера матриц" << endl;		
+		throw MatrixExeption(wrongsize, size);
 	}
 	return res;
 }
@@ -99,7 +93,7 @@ Matrix Matrix::operator*(const Matrix& matrix)
 	}
 	else
 	{
-		cout << "Умножение невозможно из-за разного размера матриц" << endl;
+		throw MatrixExeption(wrongsize, size);
 	}
 	return res;
 }
@@ -124,16 +118,18 @@ int*Matrix:: operator[](int i)
 		return mtx[i];
 	else
 	{
-		cout << "Неверный индекс" << endl;	
+		throw MatrixExeption(outofArray,size);
 		return mtx[0];
 	}
 }
 //Транспонирование матрицы
-void Matrix::Transpositione()
-{
-	for (int i = 0; i < size - 1; i++)
-		for (int j = i + 1; j < size; j++)
-			swap(mtx[i][j], mtx[j][i]);
+Matrix Matrix::Transpositione()
+{ 
+	Matrix res(*this);
+	for (int i = 0; i < res.size - 1; i++)
+		for (int j = i + 1; j < res.size; j++)
+			swap(res.mtx[i][j], res.mtx[j][i]);
+	return res;
 }
 //Проверка на диагональное преобладание
 bool Matrix:: DiagonalDominant()
@@ -150,9 +146,48 @@ bool Matrix:: DiagonalDominant()
 	}
 	return true;
 }
+void Matrix::ChangeSize(const int _size)
+{
+	Matrix copy;
+	int n = 0;
+	if (size > 0) 
+	{
+		//Копирование
+		copy = *this;   
+		delete[] mtx; 
+		n = size;
+		if (_size < n)
+			n = _size;
+	}
+	size = _size;
+	mtx = new int* [size];
+	for (int i = 0; i < size; ++i)
+		mtx[i] = new int[size];
+	for (int i = 0; i < size; i++)
+	{		
+		//Заполнение 0
+		for (int j = 0; j < size; j++)
+			mtx[i][j] = 0;
+	}
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			mtx[i][j] = copy.mtx[i][j];
+}
+
+void Matrix::array2(int _size)
+{
+	size = _size;
+	mtx = new int* [size];
+	for (int i = 0; i < size; ++i)
+		mtx[i] = new int[size];
+}
+
 //Перегрузка операции >>
 istream& operator>>(istream& stream, Matrix& matrix)
 {
+	int _size;
+	stream >> _size;
+	matrix.ChangeSize(_size);
 	for (int i = 0; i < matrix.size; i++)
 		for (int j = 0; j < matrix.size; j++)
 			stream >> matrix.mtx[i][j];
@@ -161,10 +196,11 @@ istream& operator>>(istream& stream, Matrix& matrix)
 //Перегрузка операции <<
 ostream& operator<<(ostream& stream, const Matrix& matrix)
 {
+	stream << matrix.size << endl;
 	for (int i = 0; i < matrix.size; i++)
 	{
 		for (int j = 0; j < matrix.size; j++)
-			stream << matrix.mtx[i][j] << ' ';
+			stream << matrix.mtx[i][j] << "\t";
 		stream << endl;
 	}
 	return stream;
