@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 enum class ExceptionType { outOfBoundsArray,UnacceptableDeg};
 struct Exception
@@ -15,25 +15,25 @@ class Polinom
 	int deg; 
 	double* cft;
 public:
-	Polinom();                 // Конструктор по умолчанию
-	Polinom(const Polinom& c);// Конструктор копирования
-	Polinom(int _deg, double* _cft);// Конструктор инициализации
-	Polinom(int _deg);           // конструктор преобразования типа
-	~Polinom();                 // Деструктор
+	Polinom();                 // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+	Polinom(const Polinom& c);// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
+	Polinom(int _deg, double* _cft);// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё
+	Polinom(int _deg);           // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ С‚РёРїР°
+	~Polinom();                 // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
 
 
 
    
-    double value(Polinom c, double x); // значение в заданной точке
-    void derv(Polinom& c);             // производная данного полинома
-    Polinom operator + (const Polinom&);   //оператор сложения двух полиномов
-    Polinom operator = (const Polinom&);   //оператор присваивания
-	double& operator[](int ind); // операция индексации 
-    const double& operator[](int ind) const; //операция индексации для константных объектов
-	void OutputPolinom();   //функция вывода полинома
+    double value(Polinom c, double x); // Р·РЅР°С‡РµРЅРёРµ РІ Р·Р°РґР°РЅРЅРѕР№ С‚РѕС‡РєРµ
+    void derv(Polinom& c);             // РїСЂРѕРёР·РІРѕРґРЅР°СЏ РґР°РЅРЅРѕРіРѕ РїРѕР»РёРЅРѕРјР°
+    Polinom operator + (const Polinom&);   //РѕРїРµСЂР°С‚РѕСЂ СЃР»РѕР¶РµРЅРёСЏ РґРІСѓС… РїРѕР»РёРЅРѕРјРѕРІ
+    Polinom operator = (const Polinom&);   //РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
+	double& operator[](int ind); // РѕРїРµСЂР°С†РёСЏ РёРЅРґРµРєСЃР°С†РёРё 
+    const double& operator[](int ind) const; //РѕРїРµСЂР°С†РёСЏ РёРЅРґРµРєСЃР°С†РёРё РґР»СЏ РєРѕРЅСЃС‚Р°РЅС‚РЅС‹С… РѕР±СЉРµРєС‚РѕРІ
+	void OutputPolinom();   //С„СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° РїРѕР»РёРЅРѕРјР°
 
-	friend std::ostream& operator<< (std::ostream& stream, Polinom& p); //ввод в поток
-	friend std::istream& operator>> (std::istream& stream, Polinom& p); // вывод из потока
+	friend std::ostream& operator<< (std::ostream& stream, Polinom& p); //РІРІРѕРґ РІ РїРѕС‚РѕРє
+	friend std::istream& operator>> (std::istream& stream, Polinom& p); // РІС‹РІРѕРґ РёР· РїРѕС‚РѕРєР°
    
 
 

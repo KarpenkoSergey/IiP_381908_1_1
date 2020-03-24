@@ -1,4 +1,4 @@
-#include <iostream> 
+п»ї#include <iostream> 
 #include <clocale>
 #include <fstream>
 #include <algorithm>
@@ -17,12 +17,12 @@ int main()
 		double arr1[] = { 1,2,3,2 };
 		Polinom p1(3, arr1);
 
-		double c1 = p1.value(p1, 2); // значение в точке
+		double c1 = p1.value(p1, 2); // Р·РЅР°С‡РµРЅРёРµ РІ С‚РѕС‡РєРµ
 		cout << c1 << endl;
 		p1.OutputPolinom();
 
 		Polinom p2;
-		p1.derv(p2);                 // производная
+		p1.derv(p2);                 // РїСЂРѕРёР·РІРѕРґРЅР°СЏ
 		p2.OutputPolinom();
 
 		Polinom p3;
@@ -46,11 +46,11 @@ int main()
 		switch (error.error)
 		{
 		case ExceptionType::outOfBoundsArray:
-			std::cout << std::endl << "Ошибка.Выход за границы массива \n";
+			std::cout << std::endl << "РћС€РёР±РєР°.Р’С‹С…РѕРґ Р·Р° РіСЂР°РЅРёС†С‹ РјР°СЃСЃРёРІР° \n";
 			fout << "-1 \n";
 			break;
 		case ExceptionType::UnacceptableDeg:
-			std::cout << std::endl << " Недопустимая степень полинома \n";
+			std::cout << std::endl << " РќРµРґРѕРїСѓСЃС‚РёРјР°СЏ СЃС‚РµРїРµРЅСЊ РїРѕР»РёРЅРѕРјР° \n";
 			fout << "-2 \n";
 			break;
 

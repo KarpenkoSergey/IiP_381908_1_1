@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include<clocale>
 #include <fstream>
 #include <algorithm>
