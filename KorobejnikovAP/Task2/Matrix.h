@@ -6,6 +6,7 @@ class Matrix {
 	private:
 		int size;
 		int **m;
+
     public:
 		Matrix();
 		Matrix(int _size);
@@ -18,8 +19,17 @@ class Matrix {
 	    int* operator[] (int i);
 		Matrix operator *(int k);
 		Matrix operator *(const Matrix& mat);
+		friend Matrix trsp(const Matrix& mat);
+		friend Matrix operator *(const Matrix& mat, int k);
 		friend ostream& operator << (ostream&, const Matrix& mat);
 		friend istream& operator >> (istream&, Matrix& m);
-		friend void trsp(const Matrix& mat);
 		friend bool diag_dm(const Matrix& mat);
+		friend void make(Matrix& mat, int _size);
+		friend void del(Matrix& mat);
+};
+
+enum class ExceptionType {sizeError, outArray};
+struct Exception {
+	ExceptionType err;
+	Exception(ExceptionType _err);
 };
