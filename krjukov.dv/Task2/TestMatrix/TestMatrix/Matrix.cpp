@@ -1,26 +1,26 @@
-#include "Matrix.h"
+п»ї#include "Matrix.h"
 #include <iostream>
 #include <fstream>
 Exception::Exception(ExceptionType _error)
 {
 	error = _error;
 }
-Matrix::Matrix()  //конструктор по умолчанию
+Matrix::Matrix()  //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 {
 	size = 0; mat = 0;
 }
-Matrix::Matrix(int _size) //конструктор выделения памяти под матрицу
+Matrix::Matrix(int _size) //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РІС‹РґРµР»РµРЅРёСЏ РїР°РјСЏС‚Рё РїРѕРґ РјР°С‚СЂРёС†Сѓ
 {
 	create(_size);
 }
-Matrix::Matrix(int _size, int fill) //конструктор выделения памяти под матрицу и заполнение одним числом
+Matrix::Matrix(int _size, int fill) //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РІС‹РґРµР»РµРЅРёСЏ РїР°РјСЏС‚Рё РїРѕРґ РјР°С‚СЂРёС†Сѓ Рё Р·Р°РїРѕР»РЅРµРЅРёРµ РѕРґРЅРёРј С‡РёСЃР»РѕРј
 {
 	create(_size);
 	for (int i = 0; i < size; ++i)
 		for (int j = 0; j < size; ++j)
 			mat[i][j] = fill;	
 }
-Matrix::Matrix(const Matrix& m) //конструктор копирования
+Matrix::Matrix(const Matrix& m) //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 {
 	create(m.size);
 
@@ -32,7 +32,7 @@ Matrix::~Matrix()
 {
 	del();
 }
-Matrix& Matrix::operator=(const Matrix& m) //операция присваивания
+Matrix& Matrix::operator=(const Matrix& m) //РѕРїРµСЂР°С†РёСЏ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
 {
 	if (size != m.size)
 	{
@@ -44,7 +44,7 @@ Matrix& Matrix::operator=(const Matrix& m) //операция присваивания
 			mat[i][j] = m.mat[i][j];
 	return *this;
 }
-Matrix Matrix::operator+(const Matrix& m) ///операция суммирования двух матриц одинакового размера
+Matrix Matrix::operator+(const Matrix& m) ///РѕРїРµСЂР°С†РёСЏ СЃСѓРјРјРёСЂРѕРІР°РЅРёСЏ РґРІСѓС… РјР°С‚СЂРёС† РѕРґРёРЅР°РєРѕРІРѕРіРѕ СЂР°Р·РјРµСЂР°
 {
 	Matrix res;
 	if (size == m.size)
@@ -58,7 +58,7 @@ Matrix Matrix::operator+(const Matrix& m) ///операция суммирования двух матриц о
 		throw Exception(ExceptionType::sizeError);
 	return res;
 }
-Matrix Matrix::operator*(const Matrix& m) //операция умножения матриц
+Matrix Matrix::operator*(const Matrix& m) //РѕРїРµСЂР°С†РёСЏ СѓРјРЅРѕР¶РµРЅРёСЏ РјР°С‚СЂРёС†
 {
 	Matrix res;
 	if (size == m.size)
@@ -78,7 +78,7 @@ Matrix Matrix::operator*(const Matrix& m) //операция умножения матриц
 		throw Exception(ExceptionType::sizeError);
 	return res;
 }
-Matrix Matrix::operator*(int num) //операция умножения матрицы на скаляр
+Matrix Matrix::operator*(int num) //РѕРїРµСЂР°С†РёСЏ СѓРјРЅРѕР¶РµРЅРёСЏ РјР°С‚СЂРёС†С‹ РЅР° СЃРєР°Р»СЏСЂ
 {
 	Matrix res = *this;
 	for (int i = 0; i < size; ++i)
@@ -86,18 +86,18 @@ Matrix Matrix::operator*(int num) //операция умножения матрицы на скаляр
 			res.mat[i][j] *= num;
 	return res;
 }
-Matrix operator* (int num, Matrix& m) //операция умножения скаляра на матрицу
+Matrix operator* (int num, Matrix& m) //РѕРїРµСЂР°С†РёСЏ СѓРјРЅРѕР¶РµРЅРёСЏ СЃРєР°Р»СЏСЂР° РЅР° РјР°С‚СЂРёС†Сѓ
 {
 	return m * num;
 }
-int* Matrix::operator[](int _i) //операция индексации с контролем выхода индекса за границы массива
+int* Matrix::operator[](int _i) //РѕРїРµСЂР°С†РёСЏ РёРЅРґРµРєСЃР°С†РёРё СЃ РєРѕРЅС‚СЂРѕР»РµРј РІС‹С…РѕРґР° РёРЅРґРµРєСЃР° Р·Р° РіСЂР°РЅРёС†С‹ РјР°СЃСЃРёРІР°
 {
 	if (_i >= 0 && _i < size)
 		return mat[_i];
 	else 
 		throw Exception(ExceptionType::outOfBoundsMatrix);
 }
-Matrix Matrix::transpose() //операция транспонирования матрицы
+Matrix Matrix::transpose() //РѕРїРµСЂР°С†РёСЏ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРёСЏ РјР°С‚СЂРёС†С‹
 {
 	Matrix res(size);
 	for (int i = 0; i < size; ++i)
@@ -105,7 +105,7 @@ Matrix Matrix::transpose() //операция транспонирования матрицы
 			res[i][j] = mat[j][i];
 	return res;
 }
-bool Matrix::diagonallyDominant() //проверить, обладает ли матрица диагональным преобладанием
+bool Matrix::diagonallyDominant() //РїСЂРѕРІРµСЂРёС‚СЊ, РѕР±Р»Р°РґР°РµС‚ Р»Рё РјР°С‚СЂРёС†Р° РґРёР°РіРѕРЅР°Р»СЊРЅС‹Рј РїСЂРµРѕР±Р»Р°РґР°РЅРёРµРј
 {
 	int c = 0;
 	for (int i = 0; i < size; ++i)
