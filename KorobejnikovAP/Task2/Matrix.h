@@ -19,11 +19,11 @@ class Matrix {
 	    int* operator[] (int i);
 		Matrix operator *(int k);
 		Matrix operator *(const Matrix& mat);
-		friend Matrix trsp(const Matrix& mat);
-		friend Matrix operator *(const Matrix& mat, int k);
+	    Matrix trsp();
+	    friend Matrix operator *( int k, const Matrix& mat);
 		friend ostream& operator << (ostream&, const Matrix& mat);
 		friend istream& operator >> (istream&, Matrix& m);
-		friend bool diag_dm(const Matrix& mat);
+	    bool diag_dm();
 		friend void make(Matrix& mat, int _size);
 		friend void del(Matrix& mat);
 };

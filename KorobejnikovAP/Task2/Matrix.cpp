@@ -43,6 +43,7 @@ Matrix::Matrix(int _size, int k) {
 Matrix::~Matrix() {
 	m = 0;
 	size = 0;
+	del(*this);
 }
 Matrix& Matrix::operator=(const Matrix& mat) {
 	if (size != mat.size) {
@@ -93,29 +94,35 @@ ostream& operator << (ostream& out,const Matrix& mat) {
 	return out;
 }
 istream& operator >> (istream& in, Matrix& mat) {
-	in >> mat.size;
-	for (int i = 0; i < mat.size; ++i)
-		for (int j = 0; j < mat.size; ++j)
-			in >> mat.m[i][j];
-	return in;
+	int _size;
+	in >> _size ;
+	if (_size == mat.size)
+	{
+		for (int i = 0; i < mat.size; ++i)
+			for (int j = 0; j < mat.size; ++j)
+				in >> mat.m[i][j];
+		return in;
+	}
+	else
+		throw Exception(ExceptionType::sizeError);
 }
-Matrix trsp(const Matrix& mat) {
-	Matrix res(mat.size);
+Matrix Matrix:: trsp() {
+	Matrix res(size);
 	for (int i = 0; i < res.size; ++i)
 		for (int j = 0; j < res.size; ++j)
-			res.m[i][j] = mat.m[j][i];
+			res.m[i][j] = m[j][i];
 	return res;
 }
-bool diag_dm(const Matrix& mat) {
+bool Matrix:: diag_dm() {
 	int s = 0;
 	int flag = 0;
-	for (int i = 0; i < mat.size; ++i) {
-		for (int j = 0; j < mat.size; ++j)
+	for (int i = 0; i < size; ++i) {
+		for (int j = 0; j < size; ++j)
 			if (i != j)
-				s += abs(mat.m[i][j]);
-		if (s > mat.m[i][i])
+				s += abs(m[i][j]);
+		if (s > m[i][i])
 			return 0;
-		if (s < mat.m[i][i])
+		if (s < m[i][i])
 			flag = 1;
 		s = 0;
 	}
@@ -142,6 +149,6 @@ Matrix Matrix::operator*(const Matrix& mat) {
 	else
 		throw Exception(ExceptionType::sizeError);
 }
-Matrix operator*(const Matrix& mat, int k) {
-	return mat * k;
+Matrix operator*(int k, const Matrix& mat) {
+	return k * mat;
 }
