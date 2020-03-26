@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include"Matrix.h"
-#include<Locale.h>
 using namespace std;
 int main()
 {
@@ -33,8 +32,8 @@ int main()
 	}
 	catch (int error)
 	{
-		cout << "Ошибка:";
-		if (error == 1) cout << "Разные размеры матриц";
-		if (error == 2) cout << "Индекс матрицы вышел за границы диапазона";
+		cout << "ERROR:";
+		if (error == 1) cout << "Size of Matrix not equal";
+		if (error == 2) cout << "Index of Matrix out of range";
 	}
 }
