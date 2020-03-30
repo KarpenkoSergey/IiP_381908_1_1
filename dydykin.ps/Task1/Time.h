@@ -19,4 +19,6 @@ public:
 	bool operator < (const Time& t);
 	friend ostream& operator << (ostream&, const Time& t);
 	friend istream& operator >> (istream&, Time& t);
+	Time operator + (int _sec);
+	Time operator - (int _sec);
 };
